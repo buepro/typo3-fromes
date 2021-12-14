@@ -1,0 +1,7 @@
+# Folders
+.build/
+.idea/
+Documentation-GENERATED-temp/
+
+# Files
+*.cache

@@ -1,6 +1,7 @@
 # Folders
 .build/
 .idea/
+/Build/node_modules/
 Documentation-GENERATED-temp/
 
 # Files

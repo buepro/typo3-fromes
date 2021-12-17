@@ -1,38 +1,39 @@
 import { html, css, LitElement } from 'lit';
 
 export class FmFilterCheckbox extends LitElement {
-  static get styles() {
-    return css`
-      :host {
-        display: block;
-        padding: 25px;
-        color: var(--fm-checkbox-filter-text-color, #000);
-      }
-    `;
-  }
-
   static get properties() {
     return {
-      title: { type: String },
-      counter: { type: Number },
+      items: { type: Array },
+      itemHtml: { type: Node }
     };
   }
 
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.counter = 5;
-  }
-
-  __increment() {
-    this.counter += 2;
+    this.itemHtml = this.children[0].cloneNode(true);
+    this.items = [
+      { name: 'name1', value: 1, label: 'Default label 1' },
+      { name: 'name2', value: 2, label: 'Default label 2' }
+    ];
   }
 
   render() {
-    return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
-    `;
+    let component = this;
+    return this.items.map(function (item) {
+      let node = component.itemHtml.cloneNode(true);
+      let input = node.getElementsByTagName('input')[0];
+      let label = node.getElementsByTagName('label')[0];
+      if (item.name !== undefined) {
+        input.name = item.name;
+      }
+      if (item.value !== undefined) {
+        input.value = item.value;
+      }
+      if (item.label !== undefined) {
+        label.textContent = item.label;
+      }
+      return node;
+    })
   }
 }
 

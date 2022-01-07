@@ -1,0 +1,17 @@
+# customsubcategory=010=Files
+# customsubcategory=110=Storage
+
+plugin.tx_fromes_events {
+  view {
+    # cat=plugin.tx_fromes_events/010/010; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:fromes/Resources/Private/Templates/
+    # cat=plugin.tx_fromes_events/010/020; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:fromes/Resources/Private/Partials/
+    # cat=plugin.tx_fromes_events/010/030; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:fromes/Resources/Private/Layouts/
+  }
+  persistence {
+    # cat=plugin.tx_fromes_events/110/a; type=string; label=Default storage PID:List of uid's from pages where records are stored. List first the `uid` from the folder where the fromes related records are stored.
+    storagePid = 224,225,226
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes">
+		<header/>
+		<body>
+			<trans-unit id="subject" resname="subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="message" resname="message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="send" resname="send">
+				<source>Send</source>
+			</trans-unit>
+			<trans-unit id="leader" resname="leader">
+				<source>Leader</source>
+			</trans-unit>
+			<trans-unit id="participant" resname="participant">
+				<source>Participant</source>
+			</trans-unit>
+			<trans-unit id="pastEvents" resname="pastEvents">
+				<source>Past events</source>
+			</trans-unit>
+			<trans-unit id="futureEvents" resname="futureEvents">
+				<source>Upcoming events</source>
+			</trans-unit>
+			<trans-unit id="user" resname="user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="searchUser" resname="searchUser">
+				<source>Search user by name or email</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

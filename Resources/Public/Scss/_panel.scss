@@ -1,0 +1,49 @@
+.fm-messenger {
+    .checkbox-inline {
+        min-width: 10em;
+    }
+    .fmc-panel {
+        margin: 1rem 0;
+        padding: $fm-gutter-medium;
+        background: $fm-panel-bg;
+    }
+    .fmc-col-result {
+        display: flex;
+    }
+    .fmc-result {
+        width: 100%;
+    }
+    .fmc-add-recipients {
+        text-align: center;
+        .btn {
+            padding: 0.5rem 3rem;
+        }
+        span {
+            display: inline-block;
+            transform: rotate(90deg);
+        }
+    }
+    .fmc-recipients {
+        position: relative;
+    }
+    .fmc-close {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 0.3rem;
+        cursor: pointer;
+        &:after {
+            content: "✕";
+        }
+    }
+}
+.fm-messenger-selector {
+    .fmc-action {
+        background: rgba(white, 0.5);
+    }
+    .fmc-itemlist {
+        padding: 1rem;
+        background: white;
+    }
+}

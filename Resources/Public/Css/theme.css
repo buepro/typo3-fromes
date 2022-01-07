@@ -1,0 +1,49 @@
+@charset "UTF-8";
+.fm-messenger .checkbox-inline {
+  min-width: 10em;
+}
+.fm-messenger .fmc-panel {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f0f0f0;
+}
+.fm-messenger .fmc-col-result {
+  display: flex;
+}
+.fm-messenger .fmc-result {
+  width: 100%;
+}
+.fm-messenger .fmc-add-recipients {
+  text-align: center;
+}
+.fm-messenger .fmc-add-recipients .btn {
+  padding: 0.5rem 3rem;
+}
+.fm-messenger .fmc-add-recipients span {
+  display: inline-block;
+  transform: rotate(90deg);
+}
+.fm-messenger .fmc-recipients {
+  position: relative;
+}
+.fm-messenger .fmc-close {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 0.3rem;
+  cursor: pointer;
+}
+.fm-messenger .fmc-close:after {
+  content: "✕";
+}
+
+.fm-messenger-selector .fmc-action {
+  background: rgba(255, 255, 255, 0.5);
+}
+.fm-messenger-selector .fmc-itemlist {
+  padding: 1rem;
+  background: white;
+}
+
+/*# sourceMappingURL=theme.css.map */

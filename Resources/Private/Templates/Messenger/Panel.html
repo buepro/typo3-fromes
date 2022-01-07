@@ -1,0 +1,80 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="Filter">
+    <div class="fmc-panel fmc-filter">
+        <f:form name="filterDto" object="{filterDto}">
+            <div class="form-group">
+                <div class="checkbox-inline form-check form-check-inline">
+                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-typeLeader" property="typeLeader" value="1" />
+                    <label class="form-check-label" for="tx-grevman-field-typeLeader">{f:translate(key: 'leader')}</label>
+                </div>
+                <div class="checkbox-inline form-check form-check-inline">
+                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-typeParticipant" property="typeParticipant" value="1" />
+                    <label class="form-check-label" for="tx-grevman-field-typeParticipant">{f:translate(key: 'participant')}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox-inline form-check form-check-inline">
+                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-pastEvents" property="pastEvents" value="1" />
+                    <label class="form-check-label" for="tx-grevman-field-pastEvents">{f:translate(key: 'pastEvents')}</label>
+                </div>
+                <div class="checkbox-inline form-check form-check-inline">
+                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-futureEvents" property="futureEvents" value="1" />
+                    <label class="form-check-label" for="tx-grevman-field-futureEvents">{f:translate(key: 'futureEvents')}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <f:render partial="Messenger/Selector" arguments="{_all}"/>
+            </div>
+            <div class="form-group">
+                <div class="checkbox-inline form-check form-check-inline">
+                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-groups" property="groups" value="1" />
+                    <label class="form-check-label" for="tx-grevman-field-groups">Groups</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <f:render partial="Messenger/Selector" arguments="{_all}"/>
+            </div>
+            <div class="form-group">
+                <f:form.textfield class="form-control" placeholder="{f:translate(key: 'searchUser')}" property="user"/>
+            </div>
+        </f:form>
+    </div>
+</f:section>
+
+<f:section name="Result">
+    <div class="fmc-panel fmc-result">
+        <f:form name="receiversDto" object="{receiversDto}">
+            <f:render partial="Messenger/Selector" arguments="{_all}"/>
+        </f:form>
+    </div>
+</f:section>
+
+<f:section name="AddRecipients">
+    <div class="fmc-add-recipients">
+        <button class="btn btn-primary"><span>❯</span></button>
+    </div>
+</f:section>
+
+<f:section name="Recipients">
+    <div class="fmc-panel fmc-recipients">
+        <span class="fmc-close"></span>
+        Recipients (Gabi Muster, Hans Muster, ...)
+    </div>
+</f:section>
+
+<f:section name="Mail">
+    <div class="fmc-panel fmc-mail">
+        <f:form action="filter" name="filterDto" object="{mailDto}">
+            <div class="form-group">
+                <f:form.textfield class="form-control" placeholder="{f:translate(key: 'subject')}" property="user"/>
+            </div>
+            <div class="form-group">
+                <f:form.textarea property="message" class="form-control" placeholder="{f:translate(key: 'message')}*" />
+            </div>
+            <f:form.submit class="btn btn-primary" value="{f:translate(key: 'send')}" />
+        </f:form>
+    </div>
+</f:section>
+</html>

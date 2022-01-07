@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true"><f:spaceless>
+
+<div class="tx-fromes fm-messenger">
+    <header>
+        <h1>Messenger panel</h1>
+    </header>
+    <div class="row">
+        <div class="col-md-6 fmc-col-filter">
+            <f:render section="Filter" />
+        </div>
+        <div class="col-md-6 fmc-col-result">
+            <f:render section="Result" />
+        </div>
+        <div class="col-md-6 offset-md-6">
+            <f:render section="AddRecipients" />
+        </div>
+    </div>
+    <f:render section="Recipients" />
+    <f:render section="Mail" />
+</div>
+
+</f:spaceless></html>

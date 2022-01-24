@@ -3,37 +3,65 @@ import { html, css, LitElement } from 'lit';
 export class FmFilterCheckbox extends LitElement {
   static get properties() {
     return {
+      id: { type: String, attribute: 'data-filter-id' },
       items: { type: Array },
-      itemHtml: { type: Node }
     };
   }
 
+  _scaffoldHTML = null;
+  _scaffold = null;
+  _itemsParent = null;
+  _itemTemplate = null;
+
   constructor() {
     super();
-    this.itemHtml = this.children[0].cloneNode(true);
-    this.items = [
-      { name: 'name1', value: 1, label: 'Default label 1' },
-      { name: 'name2', value: 2, label: 'Default label 2' }
-    ];
+    this._scaffoldHTML = this.innerHTML;
+    this.innerHTML = '';
+  }
+
+  createRenderRoot() {
+    return this;
+  }
+
+  getScaffold() {
+    if (this._scaffold === null) {
+      this._scaffold = document.createRange().createContextualFragment(this._scaffoldHTML);
+      let itemTemplate = this._scaffold.querySelector('[data-filter="item-template"]');
+      this._itemsParent = itemTemplate.parentNode;
+      this._itemTemplate = itemTemplate.cloneNode(true);
+      this._scaffold.removeChild(itemTemplate);
+    }
+    return this._scaffold;
   }
 
   render() {
-    let component = this;
-    return this.items.map(function (item) {
-      let node = component.itemHtml.cloneNode(true);
+    let content = this.getScaffold();
+    if (!this.items || this.items.length === 0) {
+      return content;
+    }
+    for (const item of this.items) {
+      let node = this._itemTemplate.cloneNode(true);
       let input = node.getElementsByTagName('input')[0];
       let label = node.getElementsByTagName('label')[0];
-      if (item.name !== undefined) {
-        input.name = item.name;
-      }
-      if (item.value !== undefined) {
-        input.value = item.value;
-      }
+      label.htmlFor = input.name = input.id = `${this.id}-${item.id}`;
+      input.value = item.id;
       if (item.label !== undefined) {
         label.textContent = item.label;
       }
-      return node;
-    })
+      this._itemsParent.appendChild(node);
+    }
+    return content;
+  }
+
+  get value () {
+    const inputs = this.getElementsByTagName('input');
+    const result = [];
+    for (const input of inputs) {
+      if (input.checked) {
+        result.push(input.value);
+      }
+    }
+    return result;
   }
 }
 

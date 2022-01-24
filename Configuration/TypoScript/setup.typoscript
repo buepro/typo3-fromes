@@ -26,22 +26,23 @@ plugin.tx_fromes_messenger {
   }
 
   settings {
-    filters {
+    filter {
+      includedSubfilters = feUserGroup
+    }
+    subfilters {
       feUserGroup {
+        id = user-group
         type = checkbox
-        title = LLL:EXT:fromes/Resources/Private/Language/locallang.xls:feUserGroup
+        items = TypoScript
         items {
-          source = TS
-          ts {
-            table = fe_groups
-            select {
-              pidInList = 3
-              uidInList = 1,2,3
-            }
-            fieldMap {
-              id = uid
-              title = title
-            }
+          table = fe_groups
+          select {
+            pidInList = 3
+            uidInList = 1,2,3
+          }
+          fieldMap {
+            id = uid
+            label = title
           }
         }
       }
@@ -50,3 +51,4 @@ plugin.tx_fromes_messenger {
 }
 
 page.includeCSS.fromes = EXT:fromes/Resources/Public/Css/theme.css
+page.includeJSFooterlibs.fromes = EXT:fromes/Resources/Public/JavaScript/Dist/FilterComponents.min.js

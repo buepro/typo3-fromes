@@ -3,7 +3,7 @@ import { terser } from 'rollup-plugin-terser';
 import cleanup from 'rollup-plugin-cleanup';
 
 export default {
-  input: ['./Sources/JavaScript/FmFilterCheckbox.js'],
+  input: ['./Sources/JavaScript/Components.js'],
   output: {
     file: './../Resources/Public/JavaScript/Dist/FilterComponents.min.js',
     format: 'iife',

@@ -7,16 +7,32 @@
 <body>
 
 <div class="mt-5 d-flex justify-content-center">
-    <fm-filter-checkbox id="fm-filter-checkbox1">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="" value="">
-            <label class="form-check-label">
-                Default checkbox
-            </label>
-        </div>
-    </fm-filter-checkbox>
+    <fm-filter id="fm-filter" data-config='{
+        "accessToken": "A1Eqj3wcM5uS@snBI49U",
+        "jsonFilter": [
+            {
+                "id":"checkbox1",
+                "type":"checkbox",
+                "items":[
+                    {"id":1,"label":"Group 1"},
+                    {"id":2,"label":"Group 2"},
+                    {"id":3,"label":"Group 3"}
+                ]
+            }
+        ]}'>
+
+        <fm-filter-checkbox data-filter-id="checkbox1">
+            <h4>Frontend user group</h4>
+            <div class="form-check" data-filter="item-template">
+                <input class="form-check-input" type="checkbox" name="" value="">
+                <label class="form-check-label">Default checkbox</label>
+            </div>
+        </fm-filter-checkbox>
+
+    </fm-filter>
 </div>
 
+<script type="module" src="./JavaScript/FmFilter.js" ></script>
 <script type="module" src="./JavaScript/FmFilterCheckbox.js" ></script>
 <script src="index.js"></script>
 

@@ -30,9 +30,6 @@
 			<trans-unit id="searchUser" resname="searchUser">
 				<source>Search user by name or email</source>
 			</trans-unit>
-			<trans-unit id="feUserGroup" resname="feUserGroup">
-				<source>Frontend user group</source>
-			</trans-unit>
 		</body>
 	</file>
 </xliff>

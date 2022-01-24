@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Controller;
 
-use TYPO3\CMS\Core\Localization\LanguageService;
+use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -25,32 +25,39 @@ class MessengerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      */
     public function panelAction(): void
     {
-        $this->view->assignMultiple(['jsonFilters' => $this->getJsonFiltersFromSettings()]);
+        $this->view->assignMultiple([
+            'config' => json_encode([
+                'accessToken' => (new SessionService())->getAccessToken(),
+                'jsonFilter' => $this->getJsonFilterFromSettings(),
+            ], JSON_THROW_ON_ERROR),
+        ]);
     }
 
-    private function getJsonFiltersFromSettings(): string
+    private function getJsonFilterFromSettings(): array
     {
         $filters = [];
-        $languageService = GeneralUtility::makeInstance(LanguageService::class);
-        foreach($this->settings['filters'] as $id => $conf) {
-            if (($method = $this->getFilterItemsMethodName($conf['items'])) !== null) {
-                $filters[$id] = $conf;
-                $filters[$id]['title'] = $languageService->sL($filters[$id]['title']);
-                $filters[$id]['items'] = $this->$method($conf['items']);
+        $includedSubfilters = GeneralUtility::trimExplode(',', $this->settings['filter']['includedSubfilters']);
+        foreach ($includedSubfilters as $subfilter) {
+            if (
+                ($config = $this->settings['subfilters'][$subfilter] ?? false) !== false &&
+                ($method = $this->getFilterItemsMethodName($config['items'])) !== null
+            ) {
+                $filter = $config;
+                $filter['items'] = $this->$method($config['items']);
+                $filters[] = $filter;
             }
         }
-        return json_encode($filters);
+        return $filters;
     }
 
     private function getFilterItemsMethodName(array $conf): ?string
     {
-        $methodName = 'getFilterItemsFrom' . ucfirst(strtolower($conf['source']));
+        $methodName = 'getFilterItemsFrom' . $conf['_typoScriptNodeValue'] ?? '';
         return method_exists($this, $methodName) ? $methodName : null;
     }
 
-    private function getFilterItemsFromTs(array $conf): array
+    private function getFilterItemsFromTypoScript(array $conf): array
     {
-        $conf = $conf['ts'];
         $cObjRenderer = new ContentObjectRenderer();
         $items = $cObjRenderer->getRecords($conf['table'], $conf['select']);
         return array_map(function ($item) use ($conf) {

@@ -4,11 +4,8 @@
     else document.addEventListener("DOMContentLoaded", callback);
   }
 
+  // DOM ready
   ready(() => {
-    let checkboxFilter = document.querySelector('#fm-filter-checkbox1');
-    checkboxFilter.items = [
-      { name: 'name1', value: 1, label: 'Label 1' },
-      { name: 'name2', value: 2, label: 'Label 2' }
-    ];
+
   });
 })();

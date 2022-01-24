@@ -2,7 +2,23 @@
 <f:layout name="Default" />
 
 <f:section name="Filter"><f:debug>{_all}</f:debug>
-    <div class="fmc-panel fmc-filter">
+
+    <div class="mt-5 d-flex justify-content-center">
+
+        <fm-filter data-config="{config}">
+            <fm-filter-checkbox data-filter-id="user-group">
+                <h4 data-filter="title">Checkbox filter</h4>
+                <div class="form-check" data-filter="item-template">
+                    <input class="form-check-input" type="checkbox" name="" value="">
+                    <label class="form-check-label">
+                        Default checkbox
+                    </label>
+                </div>
+            </fm-filter-checkbox>
+        </fm-filter>
+
+    </div>
+    <div id="fm-filter" class="fmc-panel fmc-filter">
         <f:form name="filterDto" object="{filterDto}">
             <div class="form-group">
                 <div class="checkbox-inline form-check form-check-inline">

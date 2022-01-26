@@ -37,6 +37,7 @@ class MessengerController extends ActionController
         $this->view->assignMultiple([
             'config' => json_encode([
                 'accessToken' => (new SessionService())->getAccessToken(),
+                'resultElementId' => $this->settings['filter']['resultElementId'] ?? 'undefined',
                 'jsonFilter' => (new FilterConfigurationService($this->settings))->getJsonFilter(),
             ], JSON_THROW_ON_ERROR),
         ]);

@@ -28,6 +28,7 @@ plugin.tx_fromes_messenger {
   settings {
     filter {
       includedSubfilters = feUserGroup
+      resultElementId = fm-list
     }
     subfilters {
       feUserGroup {

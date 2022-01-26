@@ -1,0 +1,12 @@
+fm-filter, fm-list {
+    display: block;
+    margin: 2rem;
+    padding: 1rem;
+    background: #eee;
+}
+.fmc-control li:first-child .nav-link {
+    padding-left: 0;
+}
+.fmc-control li:last-child .nav-link {
+    padding-right: 0;
+}

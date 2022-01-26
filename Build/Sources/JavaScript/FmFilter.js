@@ -1,16 +1,19 @@
 import { html, css, LitElement } from 'lit';
 
 export class FmFilter extends LitElement {
+
+  _subfilters = [];
+  _form = null;
+
   static properties = {
     config: { type: Object, attribute: 'data-config' }
   };
 
   constructor() {
     super();
+    this._form = this.removeChild(this.getElementsByTagName('form')[0]);
     this.addEventListener('change', this.handleChangeEvent);
   }
-
-  _subfilters = [];
 
   createRenderRoot() {
     return this;
@@ -18,7 +21,7 @@ export class FmFilter extends LitElement {
 
   initializeFilters() {
     for (const config of this.config['jsonFilter']) {
-      let subfilter = this.querySelector('[data-filter-id="' + config.id + '"]');
+      let subfilter = this.querySelector('#' + config.id);
       if (subfilter !== null) {
         subfilter.items = config.items;
         this._subfilters.push(subfilter);
@@ -28,7 +31,6 @@ export class FmFilter extends LitElement {
 
   render() {
     this.initializeFilters();
-    return this.children;
   }
 
   handleChangeEvent(event) {
@@ -41,15 +43,15 @@ export class FmFilter extends LitElement {
   }
 
   createServerRequest(data) {
-    const url = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    console.log(url);
-    fetch(url, {
-      method: 'POST',
+    this.setFormData(data);
+    fetch(
+      this._form.action,
+      {
+      method: 'post',
       headers: {
-        'Content-Type': 'application/json',
         'Fromes' : this.config['accessToken']
       },
-      body: JSON.stringify({ data }),
+      body: (new FormData(this._form)),
     })
       .then(response => response.json())
       .then(data => {
@@ -58,6 +60,10 @@ export class FmFilter extends LitElement {
       .catch((error) => {
         console.error('Error:', error);
       });
+  }
+
+  setFormData(data) {
+    this._form.querySelector('[data-filter="status"]').value = JSON.stringify({ data });
   }
 }
 

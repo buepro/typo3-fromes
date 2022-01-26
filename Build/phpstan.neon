@@ -9,6 +9,9 @@ parameters:
 	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
 
+	ignoreErrors:
+	- "#^Variable method call on#"
+
 	paths:
 	- %currentWorkingDirectory%/Classes/
 	- %currentWorkingDirectory%/Configuration/

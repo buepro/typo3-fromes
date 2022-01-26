@@ -14,7 +14,10 @@ defined('TYPO3') || die('Access denied.');
         'Fromes',
         'Messenger',
         [
-            \Buepro\Fromes\Controller\MessengerController::class => 'panel',
+            \Buepro\Fromes\Controller\MessengerController::class => 'panel,filter',
+        ],
+        [
+            \Buepro\Fromes\Controller\MessengerController::class => 'filter',
         ]
     );
 

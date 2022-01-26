@@ -32,7 +32,7 @@ plugin.tx_fromes_messenger {
     subfilters {
       feUserGroup {
         id = user-group
-        type = checkbox
+        class = \Buepro\Fromes\Domain\Model\UserGroupSubfilter
         items = TypoScript
         items {
           table = fe_groups

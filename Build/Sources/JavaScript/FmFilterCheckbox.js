@@ -3,41 +3,30 @@ import { html, css, LitElement } from 'lit';
 export class FmFilterCheckbox extends LitElement {
   static get properties() {
     return {
-      id: { type: String, attribute: 'data-filter-id' },
+      id: { type: String },
       items: { type: Array },
     };
   }
 
-  _scaffoldHTML = null;
-  _scaffold = null;
   _itemsParent = null;
   _itemTemplate = null;
 
   constructor() {
     super();
-    this._scaffoldHTML = this.innerHTML;
-    this.innerHTML = '';
+    let itemTemplate = this.querySelector('[data-filter="item-template"]');
+    this._itemsParent = itemTemplate.parentNode;
+    this._itemTemplate = itemTemplate.cloneNode(true);
+    itemTemplate.remove();
   }
 
   createRenderRoot() {
     return this;
   }
 
-  getScaffold() {
-    if (this._scaffold === null) {
-      this._scaffold = document.createRange().createContextualFragment(this._scaffoldHTML);
-      let itemTemplate = this._scaffold.querySelector('[data-filter="item-template"]');
-      this._itemsParent = itemTemplate.parentNode;
-      this._itemTemplate = itemTemplate.cloneNode(true);
-      this._scaffold.removeChild(itemTemplate);
-    }
-    return this._scaffold;
-  }
-
   render() {
-    let content = this.getScaffold();
+    this._itemsParent.textContent = '';
     if (!this.items || this.items.length === 0) {
-      return content;
+      return;
     }
     for (const item of this.items) {
       let node = this._itemTemplate.cloneNode(true);
@@ -50,7 +39,6 @@ export class FmFilterCheckbox extends LitElement {
       }
       this._itemsParent.appendChild(node);
     }
-    return content;
   }
 
   get value () {

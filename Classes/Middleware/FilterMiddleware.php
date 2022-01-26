@@ -1,22 +1,35 @@
 <?php
 
+/*
+ * This file is part of the composer package buepro/typo3-fromes.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Buepro\Fromes\Middleware;
 
+use Buepro\Fromes\Service\SessionService;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Http\StreamFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class FilterMiddleware implements \Psr\Http\Server\MiddlewareInterface
+class FilterMiddleware implements MiddlewareInterface
 {
     /** @var ResponseFactoryInterface */
     private $responseFactory;
 
-    public function __construct(ResponseFactoryInterface $responseFactory)
+    /** @var StreamFactory */
+    private $streamFactory;
+
+    public function __construct(ResponseFactoryInterface $responseFactory, StreamFactory $streamFactory)
     {
         $this->responseFactory = $responseFactory;
+        $this->streamFactory = $streamFactory;
     }
 
     /**
@@ -28,20 +41,16 @@ class FilterMiddleware implements \Psr\Http\Server\MiddlewareInterface
     {
         if (
             isset($request->getHeader('fromes')[0]) &&
-            (new \Buepro\Fromes\Service\SessionService())->getAccessToken() === $request->getHeader('fromes')[0] &&
-            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'isLoggedIn')
+            (new SessionService())->getAccessToken() === $request->getHeader('fromes')[0]
         ) {
-            $content = $request->getBody()->getContents();
-            $filterData = json_decode($content)->data;
-//            $filter = new Filter();
-//            foreach($filterData as $subfilterData) {
-//                $filter->addSubfilter(Subfilter::createFromData($subfilterData));
-//            }
-//            $feUsers = (new FrontendUserRepository())->setFilterConstraints($filter->getConstraints());
-            $response = $this->responseFactory->createResponse()
-                ->withHeader('Content-Type', 'application/json; charset=utf-8');
-            $response->getBody()->write(json_encode($feUsers ?? []));
-            return $response;
+            $extbaseBootstrap = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
+            $json = $extbaseBootstrap->run('', [
+                'extensionName' => 'Fromes',
+                'pluginName' => 'Messenger',
+            ]);
+            return $this->responseFactory->createResponse()
+                ->withHeader('Content-Type', 'application/json; charset=utf-8')
+                ->withBody($this->streamFactory->createStream($json));
         }
         return $handler->handle($request);
     }

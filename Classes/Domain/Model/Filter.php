@@ -13,7 +13,7 @@ namespace Buepro\Fromes\Domain\Model;
 
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
-class Filter
+class Filter implements SubfilterInterface
 {
     /** @var array */
     protected $status = [];
@@ -22,12 +22,12 @@ class Filter
 
     /**
      * @param array $settings Contains the keys `filter` and `subfilters`
-     * @param string $jsonStatus Status from the filter with subfilters
+     * @param array $status Status from the filter with subfilters
      */
-    public function __construct(array $settings, string $jsonStatus)
+    public function __construct(array $settings, array $status)
     {
         $this->settings = $settings;
-        $this->status = (json_decode($jsonStatus, false))->data;
+        $this->status = $status;
     }
 
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder

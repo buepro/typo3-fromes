@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Model;
 
+use Buepro\Fromes\Service\FilterConfigurationService;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class UserGroupSubfilter implements SubfilterInterface
@@ -24,10 +25,15 @@ class UserGroupSubfilter implements SubfilterInterface
      * @param array $settings
      * @param array $status
      */
-    public function __construct(array $settings, array $status)
+    public function __construct(array $settings, array $status = [])
     {
         $this->settings = $settings;
         $this->status = $status;
+    }
+
+    public function getConfigForWebComponent(): array
+    {
+        return (new FilterConfigurationService($this->settings))->getSubfilterConfig();
     }
 
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder

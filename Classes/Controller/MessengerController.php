@@ -13,7 +13,6 @@ namespace Buepro\Fromes\Controller;
 
 use Buepro\Fromes\Domain\Model\Filter;
 use Buepro\Fromes\Domain\Repository\RecipientRepository;
-use Buepro\Fromes\Service\FilterConfigurationService;
 use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -35,11 +34,7 @@ class MessengerController extends ActionController
     public function panelAction(): void
     {
         $this->view->assignMultiple([
-            'config' => json_encode([
-                'accessToken' => (new SessionService())->getAccessToken(),
-                'resultElementId' => $this->settings['filter']['resultElementId'] ?? 'undefined',
-                'jsonFilter' => (new FilterConfigurationService($this->settings))->getJsonFilter(),
-            ], JSON_THROW_ON_ERROR),
+            'config' => json_encode((new Filter($this->settings))->getConfigForWebComponent(), JSON_THROW_ON_ERROR),
         ]);
     }
 

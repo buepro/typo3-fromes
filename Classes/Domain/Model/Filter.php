@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Model;
 
+use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Filter implements SubfilterInterface
 {
@@ -24,10 +26,29 @@ class Filter implements SubfilterInterface
      * @param array $settings Contains the keys `filter` and `subfilters`
      * @param array $status Status from the filter with subfilters
      */
-    public function __construct(array $settings, array $status)
+    public function __construct(array $settings, array $status = [])
     {
         $this->settings = $settings;
         $this->status = $status;
+    }
+
+    public function getConfigForWebComponent(): array
+    {
+        $subfilterConfig = [];
+        $subfilters = GeneralUtility::trimExplode(',', $this->settings['filter']['includedSubfilters']);
+        foreach ($subfilters as $subfilter) {
+            if (
+                ($config = $this->settings['subfilters'][$subfilter] ?? false) !== false &&
+                class_exists($className = $config['class'])
+            ) {
+                $subfilterConfig[] = (new $className($config))->getConfigForWebComponent();
+            }
+        }
+        return [
+            'accessToken' => (new SessionService())->getAccessToken(),
+            'resultElementId' => $this->settings['filter']['resultElementId'] ?? 'undefined',
+            'jsonFilter' => $subfilterConfig,
+        ];
     }
 
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder

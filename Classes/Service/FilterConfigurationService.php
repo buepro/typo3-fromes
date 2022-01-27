@@ -22,22 +22,18 @@ class FilterConfigurationService
         $this->settings = $settings;
     }
 
-    public function getJsonFilter(): array
+    public function getSubfilterConfig(): array
     {
-        $filters = [];
-        $subfilters = GeneralUtility::trimExplode(',', $this->settings['filter']['includedSubfilters']);
-        foreach ($subfilters as $subfilter) {
-            if (
-                ($config = $this->settings['subfilters'][$subfilter] ?? false) !== false &&
-                ($method = $this->getFilterItemsMethodName($config['items'])) !== null
-            ) {
-                $filters[] = [
-                    'id' => $config['id'],
-                    'items' => $this->$method($config['items']),
-                ];
-            }
+        if (
+            isset($this->settings['items'], $this->settings['id']) && $this->settings['id'] !== '' &&
+            ($method = $this->getFilterItemsMethodName($this->settings['items'])) !== null
+        ) {
+            return [
+                'id' => $this->settings['id'],
+                'items' => $this->$method($this->settings['items']),
+            ];
         }
-        return $filters;
+        return [];
     }
 
     protected function getFilterItemsMethodName(array $conf): ?string

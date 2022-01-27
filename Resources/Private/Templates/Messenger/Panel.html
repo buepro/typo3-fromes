@@ -9,7 +9,7 @@
         </f:form>
         <fm-filter-checkbox class="fmc-subfilter fmc-panel fmc-p-0" id="user-group">
             <h4 class="fmc-title">User group</h4>
-            <div class="form-group fmc-list">
+            <div class="form-group fmc-content fmc-list">
                 <div class="form-check" data-filter="item-template">
                     <input class="form-check-input" type="checkbox" name="" value="">
                     <label class="form-check-label">
@@ -63,6 +63,7 @@
 
 <f:section name="Result">
     <fm-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
+        <h4 class="fmc-title">Available users</h4>
         <ul class="nav fmc-control">
             <li class="nav-item">
                 <a class="nav-link" data-filter="select-all" href="#">All</a>
@@ -71,7 +72,7 @@
                 <a class="nav-link" data-filter="select-none" href="#">None</a>
             </li>
         </ul>
-        <ul class="nav fmc-list flex-column">
+        <ul class="nav fmc-content fmc-list">
             <li class="form-check" data-filter="item-template">
                 <input class="form-check-input" type="checkbox" />
                 <label class="form-check-label">_labelText</label>
@@ -82,15 +83,20 @@
 
 <f:section name="AddRecipients">
     <div class="fmc-add-recipients">
-        <button class="btn btn-primary"><span>❯</span></button>
+        <button class="btn btn-primary" onclick="document.getElementById('fm-collector').addItems(document.getElementById('fm-list').selected)"><span>❯</span></button>
     </div>
 </f:section>
 
 <f:section name="Recipients">
-    <div class="fmc-panel fmc-recipients">
-        <span class="fmc-close"></span>
-        Recipients (Gabi Muster, Hans Muster, ...)
-    </div>
+    <fm-collector class="fmc-recipients fmc-panel fmc-p-0" id="fm-collector">
+        <h4 class="fmc-title">Recipients</h4>
+        <div class="fmc-content">
+            <span class="fmc-close" data-filter="close"></span>
+            <ul class="list-inline">
+                <li class="list-inline-item" data-filter="item-template"><span data-filter="label">Hans Meier</span></li>
+            </ul>
+        </div>
+    </fm-collector>
 </f:section>
 
 <f:section name="Mail">

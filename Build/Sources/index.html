@@ -54,11 +54,20 @@
             </li>
         </ul>
     </fm-list>
+
+    <fm-collector id="fm-collector">
+        <button class="btn btn-primary me-4">Get from list</button>
+        <span class="fmc-close" data-filter="close"></span>
+        <ul class="list-inline">
+            <li class="list-inline-item" data-filter="item-template"><span data-filter="label">Hans Meier</span></li>
+        </ul>
+    </fm-collector>
 </div>
 
 <script type="module" src="./JavaScript/FmFilter.js" ></script>
 <script type="module" src="./JavaScript/FmFilterCheckbox.js" ></script>
 <script type="module" src="./JavaScript/FmList.js" ></script>
+<script type="module" src="./JavaScript/FmCollector.js" ></script>
 <script src="index.js"></script>
 
 </body>

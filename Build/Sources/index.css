@@ -1,4 +1,5 @@
-fm-filter, fm-list {
+fm-filter, fm-list, fm-collector {
+    position: relative;
     display: block;
     margin: 2rem;
     padding: 1rem;
@@ -9,4 +10,15 @@ fm-filter, fm-list {
 }
 .fmc-control li:last-child .nav-link {
     padding-right: 0;
+}
+.fmc-close {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 0.3rem;
+    cursor: pointer;
+}
+.fmc-close:after {
+    content: "✕";
 }

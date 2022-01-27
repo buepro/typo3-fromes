@@ -1,7 +1,14 @@
-$fm-panel-bg: #f0f0f0;
+$fm-panel-bg: #e0e0e0;
 :root {
     --fm-panel-padding: 1rem;
     --fm-panel-bg: #{$fm-panel-bg};
     --fm-panel-bg-light: #{lighten($fm-panel-bg, 3%)};
     --fm-panel-bg-lighter: #{lighten($fm-panel-bg, 6%)};
+    --fm-listitem-width: 100%;
+    @media (min-width: 992px) {
+        --fm-listitem-width: 50%;
+    }
+    @media (min-width: 1200px) {
+        --fm-listitem-width: 30%;
+    }
 }

@@ -1,45 +1,33 @@
-import { html, css, LitElement } from 'lit';
+import { FmAbstractItems } from "./FmAbstractItems";
 
-export class FmList extends LitElement {
-  static get properties() {
-    return {
-      id: { type: String },
-      items: { type: Array },
-    };
-  }
-
-  _itemsParent = null;
-  _itemTemplate = null;
-
+/**
+ * List of selectable items.
+ * An item is an object containing at least the property label: `item = { label: 'Label' }`
+ * The dom node representing the item just uses the items label and holds a reference to its index in the items array.
+ */
+export class FmList extends FmAbstractItems {
   constructor() {
     super();
-    let itemTemplate = this.querySelector('[data-filter="item-template"]');
-    this._itemsParent = itemTemplate.parentNode;
-    this._itemTemplate = itemTemplate.cloneNode(true);
-    itemTemplate.remove();
     this.addEventListener('click', this.handleClickEvent);
   }
 
-  createRenderRoot() {
-    return this;
+  get selected() {
+    let inputs = this.querySelectorAll('input:checked');
+    const result = [];
+    for (const input of inputs) {
+      result.push(this.items[input.value]);
+    }
+    return result;
   }
 
-  render() {
-    this._itemsParent.textContent = '';
-    if (!this.items || this.items.length === 0) {
-      return;
-    }
-    let counter = 0;
-    for (const item of this.items) {
-      counter++;
-      let node = this._itemTemplate.cloneNode(true);
-      let input = node.getElementsByTagName('input')[0];
-      let label = node.getElementsByTagName('label')[0];
-      label.htmlFor = input.name = input.id = `${this.id}-${counter}`;
-      input.value = JSON.stringify(item);
-      label.textContent = item.name ? item.name : item.email;
-      this._itemsParent.appendChild(node);
-    }
+  getItemNode(item, index) {
+    let node = this._itemTemplate.cloneNode(true);
+    let input = node.getElementsByTagName('input')[0];
+    let label = node.getElementsByTagName('label')[0];
+    label.htmlFor = input.name = input.id = `${this.id}-${index}`;
+    input.value = index;
+    label.textContent = item.label;
+    return node;
   }
 
   handleClickEvent(event) {

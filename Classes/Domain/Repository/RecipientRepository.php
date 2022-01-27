@@ -24,7 +24,7 @@ class RecipientRepository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
-            ->select('first_name', 'last_name', 'name', 'email')
+            ->select('uid', 'first_name', 'last_name', 'name', 'email')
             ->from('fe_users');
         $queryResult = $filter->modifyQueryBuilder($queryBuilder)->execute();
         $rows = [];
@@ -37,10 +37,12 @@ class RecipientRepository
         }
         $result = [];
         foreach ($rows as $row) {
+            $label = $row['name'] !== '' ? $row['name'] : trim($row['first_name'] . ' ' . $row['last_name']);
+            $label = $label === '' ? $row['email'] : $label;
             if ($row['email'] !== '') {
                 $result[] = [
-                    'name' => $row['name'] !== '' ? $row['name'] : trim($row['first_name'] . ' ' . $row['last_name']),
-                    'email' => $row['email'],
+                    'id' => $row['uid'],
+                    'label' => $label,
                 ];
             }
         }

@@ -4,6 +4,7 @@
     //
     .fmc-panel {
         display: block;
+        position: relative;
         margin: 1rem 0;
         padding: var(--fm-panel-padding);
         background: var(--fm-panel-bg);
@@ -12,11 +13,23 @@
         margin: 0;
         padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
     }
-    .fmc-list {
-        padding: var(--fm-panel-padding);
+    .fmc-control {
         background: var(--fm-panel-bg-light);
+    }
+    .fmc-content {
+        position: relative;
+        padding: var(--fm-panel-padding);
+        background: var(--fm-panel-bg-lighter);
+    }
+    .fmc-list {
+        display: flex;
+        flex-wrap: wrap;
         overflow-y: auto;
         max-height: 250px;
+        > * {
+            width: var(--fm-listitem-width);
+            padding-right: 1.5em;
+        }
     }
     .checkbox-inline {
         min-width: 10em;
@@ -41,9 +54,12 @@
             transform: rotate(90deg);
         }
     }
-    .fmc-recipients {
-        position: relative;
-    }
+}
+
+//
+// Components
+//
+fm-collector {
     .fmc-close {
         display: block;
         position: absolute;
@@ -53,6 +69,15 @@
         cursor: pointer;
         &:after {
             content: "✕";
+        }
+    }
+    ul {
+        margin-bottom: 0;
+        span:after {
+            content: ', ';
+        }
+        li:last-child span:after {
+            content: '';
         }
     }
 }

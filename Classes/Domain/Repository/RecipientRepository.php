@@ -26,8 +26,15 @@ class RecipientRepository
             ->getQueryBuilderForTable('fe_users')
             ->select('first_name', 'last_name', 'name', 'email')
             ->from('fe_users');
-        // @phpstan-ignore-next-line
-        $rows = $filter->modifyQueryBuilder($queryBuilder)->execute()->fetchAllAssociative();
+        $queryResult = $filter->modifyQueryBuilder($queryBuilder)->execute();
+        $rows = [];
+        if ($queryResult instanceof \Doctrine\DBAL\ForwardCompatibility\Result) {
+            $rows = $queryResult->fetchAllAssociative();
+        }
+        if ($rows === [] && $queryResult instanceof \Doctrine\DBAL\Driver\Statement) {
+            // @phpstan-ignore-next-line
+            $rows = $queryResult->fetchAll();
+        }
         $result = [];
         foreach ($rows as $row) {
             if ($row['email'] !== '') {

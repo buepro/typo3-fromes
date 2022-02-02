@@ -14,7 +14,7 @@
       ]
     })
     document.querySelector('fm-collector button').addEventListener('click', function () {
-      document.getElementById('fm-collector').addItems(
+      document.getElementById('fm-receivers').addItems(
         document.getElementById('fm-filter-result').selected
       );
     })

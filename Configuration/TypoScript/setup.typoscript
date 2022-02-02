@@ -48,8 +48,11 @@ plugin.tx_fromes_messenger {
         }
       }
     }
+    receiversCollector {
+      id = fm-receivers
+    }
   }
 }
 
 page.includeCSS.fromes = EXT:fromes/Resources/Public/Css/theme.css
-page.includeJSFooterlibs.fromes = EXT:fromes/Resources/Public/JavaScript/Dist/FilterComponents.min.js
+page.includeJSFooterlibs.fromes = EXT:fromes/Resources/Public/JavaScript/Dist/FromesComponents.min.js

@@ -44,13 +44,22 @@ class FilterMiddleware implements MiddlewareInterface
             (new SessionService())->getAccessToken() === $request->getHeader('fromes')[0]
         ) {
             $extbaseBootstrap = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
-            $json = $extbaseBootstrap->run('', [
-                'extensionName' => 'Fromes',
-                'pluginName' => 'Messenger',
-            ]);
-            return $this->responseFactory->createResponse()
-                ->withHeader('Content-Type', 'application/json; charset=utf-8')
-                ->withBody($this->streamFactory->createStream($json));
+            try {
+                $jsonString = $extbaseBootstrap->run('', [
+                    'extensionName' => 'Fromes',
+                    'pluginName' => 'Messenger',
+                ]);
+                return $this->responseFactory->createResponse()
+                    ->withHeader('Content-Type', 'application/json; charset=utf-8')
+                    ->withBody($this->streamFactory->createStream($jsonString));
+            } catch (\Exception $e) {
+                return $this->responseFactory->createResponse(500)
+                    ->withHeader('Content-Type', 'application/json; charset=utf-8')
+                    ->withBody($this->streamFactory->createStream(json_encode([
+                        "message" => $e->getMessage(),
+                        "code" => $e->getCode(),
+                    ], JSON_THROW_ON_ERROR)));
+            }
         }
         return $handler->handle($request);
     }

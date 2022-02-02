@@ -15,6 +15,7 @@
     }
     .fmc-control {
         background: var(--fm-panel-bg-light);
+        padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
     }
     .fmc-content {
         position: relative;
@@ -44,7 +45,7 @@
     //
     // Template and partials: components
     //
-    .fmc-add-recipients {
+    .fmc-add-receivers {
         text-align: center;
         .btn {
             padding: 0.5rem 3rem;
@@ -67,8 +68,8 @@ fm-collector {
         top: 0;
         padding: 0 0.3rem;
         cursor: pointer;
-        &:after {
-            content: "✕";
+        svg {
+            width: 16px;
         }
     }
     ul {

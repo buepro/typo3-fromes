@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --fm-panel-padding: 1rem;
   --fm-panel-bg: #e0e0e0;
@@ -30,6 +29,7 @@
 }
 .fm-messenger .fmc-control {
   background: var(--fm-panel-bg-light);
+  padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
 }
 .fm-messenger .fmc-content {
   position: relative;
@@ -55,13 +55,13 @@
 .fm-messenger .fmc-p-0 {
   padding: 0;
 }
-.fm-messenger .fmc-add-recipients {
+.fm-messenger .fmc-add-receivers {
   text-align: center;
 }
-.fm-messenger .fmc-add-recipients .btn {
+.fm-messenger .fmc-add-receivers .btn {
   padding: 0.5rem 3rem;
 }
-.fm-messenger .fmc-add-recipients span {
+.fm-messenger .fmc-add-receivers span {
   display: inline-block;
   transform: rotate(90deg);
 }
@@ -74,8 +74,8 @@ fm-collector .fmc-close {
   padding: 0 0.3rem;
   cursor: pointer;
 }
-fm-collector .fmc-close:after {
-  content: "✕";
+fm-collector .fmc-close svg {
+  width: 16px;
 }
 fm-collector ul {
   margin-bottom: 0;

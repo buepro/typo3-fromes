@@ -12,7 +12,9 @@ declare(strict_types=1);
 namespace Buepro\Fromes\Domain\Repository;
 
 use Buepro\Fromes\Domain\Model\Filter;
+use Doctrine\DBAL\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -26,7 +28,39 @@ class RecipientRepository
             ->getQueryBuilderForTable('fe_users')
             ->select('uid', 'first_name', 'last_name', 'name', 'email')
             ->from('fe_users');
-        $queryResult = $filter->modifyQueryBuilder($queryBuilder)->execute();
+        $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
+        $result = [];
+        foreach ($rows as $row) {
+            $label = $row['name'] !== '' ? $row['name'] : trim($row['first_name'] . ' ' . $row['last_name']);
+            $label = $label === '' ? $row['email'] : $label;
+            if (GeneralUtility::validEmail($row['email'])) {
+                $result[] = [
+                    'id' => $row['uid'],
+                    'label' => $label,
+                ];
+            }
+        }
+        return $result;
+    }
+
+    public function getForUidList(array $uidList): array
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('fe_users');
+        $queryBuilder
+            ->select('uid', 'first_name', 'last_name', 'name', 'email')
+            ->from('fe_users')
+            ->where($queryBuilder->expr()->in(
+                'uid',
+                $queryBuilder->createNamedParameter($uidList, Connection::PARAM_INT_ARRAY)
+            )
+        );
+        return $this->getFromQueryBuilder($queryBuilder);
+    }
+
+    private function getFromQueryBuilder(QueryBuilder $queryBuilder): array
+    {
+        $queryResult = $queryBuilder->execute();
         $rows = [];
         if ($queryResult instanceof \Doctrine\DBAL\ForwardCompatibility\Result) {
             $rows = $queryResult->fetchAllAssociative();
@@ -35,17 +69,6 @@ class RecipientRepository
             // @phpstan-ignore-next-line
             $rows = $queryResult->fetchAll();
         }
-        $result = [];
-        foreach ($rows as $row) {
-            $label = $row['name'] !== '' ? $row['name'] : trim($row['first_name'] . ' ' . $row['last_name']);
-            $label = $label === '' ? $row['email'] : $label;
-            if ($row['email'] !== '') {
-                $result[] = [
-                    'id' => $row['uid'],
-                    'label' => $label,
-                ];
-            }
-        }
-        return $result;
+        return $rows;
     }
 }

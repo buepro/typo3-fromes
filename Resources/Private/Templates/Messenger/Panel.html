@@ -3,7 +3,7 @@
 <f:debug>{_all}</f:debug>
 <f:section name="Filter">
 
-    <fm-filter class="fm-filter" data-config="{config}" id="fm-filter">
+    <fm-filter class="fm-filter" data-config="{filterConfig -> f:format.json()}" id="fm-filter">
         <f:form absolute="1" action="filter" method="post" name="filter">
             <f:form.hidden data="{filter: 'status'}" name="filterStatus" />
         </f:form>
@@ -64,14 +64,12 @@
 <f:section name="Result">
     <fm-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
         <h4 class="fmc-title">Available users</h4>
-        <ul class="nav fmc-control">
-            <li class="nav-item">
-                <a class="nav-link" data-filter="select-all" href="#">All</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-filter="select-none" href="#">None</a>
-            </li>
-        </ul>
+        <div class="fmc-control">
+            <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'listItemSelection')}">
+                <button type="button" class="btn btn-primary" data-filter="select-all">{f:translate(key: 'all')}</button>
+                <button type="button" class="btn btn-primary" data-filter="select-none">{f:translate(key: 'none')}</button>
+            </div>
+        </div>
         <ul class="nav fmc-content fmc-list">
             <li class="form-check" data-filter="item-template">
                 <input class="form-check-input" type="checkbox" />
@@ -81,17 +79,17 @@
     </fm-list>
 </f:section>
 
-<f:section name="AddRecipients">
-    <div class="fmc-add-recipients">
-        <button class="btn btn-primary" onclick="document.getElementById('fm-collector').addItems(document.getElementById('fm-list').selected)"><span>❯</span></button>
+<f:section name="AddReceivers">
+    <div class="fmc-add-receivers">
+        <button class="btn btn-primary" onclick="document.getElementById('fm-receivers').addItems(document.getElementById('fm-list').selected)"><span>❯</span></button>
     </div>
 </f:section>
 
-<f:section name="Recipients">
-    <fm-collector class="fmc-recipients fmc-panel fmc-p-0" id="fm-collector">
-        <h4 class="fmc-title">Recipients</h4>
+<f:section name="Receivers">
+    <fm-collector class="fmc-recipients fmc-panel fmc-p-0" id="fm-receivers">
+        <h4 class="fmc-title">Receivers</h4>
         <div class="fmc-content">
-            <span class="fmc-close" data-filter="close"></span>
+            <span class="fmc-close" data-filter="clear">{f:render(partial: 'Icons/Bin')}</span>
             <ul class="list-inline">
                 <li class="list-inline-item" data-filter="item-template"><span data-filter="label">Hans Meier</span></li>
             </ul>
@@ -100,16 +98,23 @@
 </f:section>
 
 <f:section name="Mail">
-    <div class="fmc-panel fmc-mail">
-        <f:form action="filter" name="filterDto" object="{mailDto}">
+    <fm-mail class="fmc-panel fmc-mail" data-fromes="{mailConfig -> f:format.json()}" id="fm-mail">
+        <div class="alert alert-success d-none" data-fromes="mail-success" role="alert">
+            The message was sent successfully.
+        </div>
+        <div class="alert alert-danger d-none" data-fromes="mail-error" role="alert">
+            A problem occurred when trying to send the message. Please contact the system administrator
+        </div>
+        <f:form absolute="1" action="mail" method="post">
             <div class="form-group">
-                <f:form.textfield class="form-control" placeholder="{f:translate(key: 'subject')}" property="user"/>
+                <f:form.textfield class="form-control" data="{fromes: 'subject'}" name="mailFormData[subject]" placeholder="{f:translate(key: 'subject')}*" />
             </div>
             <div class="form-group">
-                <f:form.textarea property="message" class="form-control" placeholder="{f:translate(key: 'message')}*" />
+                <f:form.textarea class="form-control" data="{fromes: 'message'}" name="mailFormData[message]" placeholder="{f:translate(key: 'message')}*" />
             </div>
-            <f:form.submit class="btn btn-primary" value="{f:translate(key: 'send')}" />
+            <f:form.hidden data="{fromes: 'receivers'}" name="mailFormData[receivers]" />
         </f:form>
-    </div>
+        <button class="btn btn-primary" data-fromes="submit">{f:translate(key: 'send')}</button>
+    </fm-mail>
 </f:section>
 </html>

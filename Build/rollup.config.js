@@ -5,7 +5,7 @@ import cleanup from 'rollup-plugin-cleanup';
 export default {
   input: ['./Sources/JavaScript/Components.js'],
   output: {
-    file: './../Resources/Public/JavaScript/Dist/FilterComponents.min.js',
+    file: './../Resources/Public/JavaScript/Dist/FromesComponents.min.js',
     format: 'iife',
     name: 'fromesComponents',
     plugins: [terser()]

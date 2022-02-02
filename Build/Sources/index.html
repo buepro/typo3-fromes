@@ -21,7 +21,7 @@
                 ]
             }
         ]}'>
-        <form action="/" method="post" name="filter">
+        <form action="/" method="post">
             <input data-filter="status" name="tx_fromes_messenger[filterStatus]" type="hidden" />
         </form>
 
@@ -38,15 +38,13 @@
     </fm-filter>
 
     <fm-list id="fm-filter-result">
-        <button class="btn btn-primary">Add data</button>
-        <ul class="nav fmc-control">
-            <li class="nav-item">
-                <a class="nav-link" data-filter="select-all" href="#">All</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-filter="select-none" href="#">None</a>
-            </li>
-        </ul>
+        <div class="mb-4"><button class="btn btn-primary">Add data</button></div>
+        <div class="mb-2">
+            <div class="btn-group btn-group-sm" role="group" aria-label="List item selections">
+                <button type="button" class="btn btn-primary" data-filter="select-all">All</button>
+                <button type="button" class="btn btn-primary" data-filter="select-none">None</button>
+            </div>
+        </div>
         <ul class="nav fmc-list flex-column">
             <li class="form-check" data-filter="item-template">
                 <input class="form-check-input" type="checkbox" />
@@ -55,19 +53,39 @@
         </ul>
     </fm-list>
 
-    <fm-collector id="fm-collector">
-        <button class="btn btn-primary me-4">Get from list</button>
-        <span class="fmc-close" data-filter="close"></span>
+    <fm-collector id="fm-receivers">
+        <button class="btn btn-primary me-4 mb-4">Get from list</button>
+        <span class="fmc-close" data-filter="clear"></span>
         <ul class="list-inline">
             <li class="list-inline-item" data-filter="item-template"><span data-filter="label">Hans Meier</span></li>
         </ul>
     </fm-collector>
+
+    <fm-mail data-fromes='{"accessToken": "A1Eqj3wcM5uS@snBI49U","receiversCollectorId": "fm-receivers"}' id="fm-mail">
+        <div class="alert alert-success d-none" data-fromes="mail-success" role="alert">
+            The message was sent successfully.
+        </div>
+        <div class="alert alert-danger d-none" data-fromes="mail-error" role="alert">
+            A problem occurred when trying to send the message. Please contact the system administrator
+        </div>
+        <form action="/" method="post">
+            <div class="mb-3">
+                <input class="form-control" data-fromes="subject" name="subject" type="text" />
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" data-fromes="message" name="message"></textarea>
+            </div>
+            <input data-fromes="receivers" name="receivers" type="hidden" />
+        </form>
+        <button class="btn btn-primary" data-fromes="submit">Send</button>
+    </fm-mail>
 </div>
 
 <script type="module" src="./JavaScript/FmFilter.js" ></script>
 <script type="module" src="./JavaScript/FmFilterCheckbox.js" ></script>
 <script type="module" src="./JavaScript/FmList.js" ></script>
 <script type="module" src="./JavaScript/FmCollector.js" ></script>
+<script type="module" src="./JavaScript/FmMail.js" ></script>
 <script src="index.js"></script>
 
 </body>

@@ -34,11 +34,11 @@ export class FmFilter extends LitElement {
   }
 
   handleChangeEvent(event) {
+    event.stopPropagation();
     const filterStatus = [];
     for (const subfilter of this._subfilters) {
       filterStatus.push({ id: subfilter.id, value: subfilter.value });
     }
-    event.stopPropagation();
     this.createServerRequest(filterStatus);
   }
 

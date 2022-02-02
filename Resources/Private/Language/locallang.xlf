@@ -3,6 +3,15 @@
 	<file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes">
 		<header/>
 		<body>
+			<trans-unit id="listItemSelection" resname="listItemSelection">
+				<source>List item selection</source>
+			</trans-unit>
+			<trans-unit id="all" resname="all">
+				<source>All</source>
+			</trans-unit>
+			<trans-unit id="none" resname="none">
+				<source>None</source>
+			</trans-unit>
 			<trans-unit id="subject" resname="subject">
 				<source>Subject</source>
 			</trans-unit>

@@ -7,7 +7,7 @@ import { FmAbstractItems } from "./FmAbstractItems";
 export class FmCollector extends FmAbstractItems {
   constructor() {
     super();
-    this.addEventListener('click', this.handleClickEvent);
+    this.querySelector('[data-filter="clear"]').addEventListener('click', this.handleClearClickEvent.bind(this));
   }
 
   addItems(newItems) {
@@ -32,18 +32,16 @@ export class FmCollector extends FmAbstractItems {
   }
 
   render() {
-    let closeNode = this.querySelector('[data-filter="close"]');
-    closeNode.classList.add('invisible');
+    let clearNode = this.querySelector('[data-filter="clear"]');
+    clearNode.classList.add('invisible');
     if (this.items && this.items.length > 0) {
-      closeNode.classList.remove('invisible');
+      clearNode.classList.remove('invisible');
     }
     FmAbstractItems.prototype.render.call(this);
   }
 
-  handleClickEvent(event) {
-    if (event.target.dataset.filter === 'close') {
-      this.items = [];
-    }
+  handleClearClickEvent(event) {
+    this.items = [];
     event.stopPropagation();
   }
 }

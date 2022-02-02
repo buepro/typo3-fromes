@@ -29,6 +29,7 @@ export class FmAbstractItems extends LitElement {
   }
 
   render() {
+    this._notify();
     this._itemsParent.textContent = '';
     if (!this.items || this.items.length === 0) {
       return;
@@ -39,5 +40,11 @@ export class FmAbstractItems extends LitElement {
         this._itemsParent.appendChild(node);
       }
     }).bind(this));
+  }
+
+  async _notify() {
+    await this.updateComplete;
+    const event = new Event('change', {bubbles: true, composed: true});
+    this.dispatchEvent(event);
   }
 }

@@ -63,7 +63,7 @@ export class FmFilter extends LitElement {
   }
 
   setFormData(data) {
-    this._form.querySelector('[data-filter="status"]').value = JSON.stringify({ data });
+    this._form.querySelector('[data-fromes="status"]').value = JSON.stringify({ data });
   }
 }
 

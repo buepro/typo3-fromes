@@ -37,7 +37,7 @@ export class FmSelectList extends FmAbstractList {
   isProcessEvent(event) {
     // Select all or none
     if (event.type === 'click') {
-      const data = event.target.dataset.filter;
+      const data = event.target.dataset.fromes;
       if (data === 'select-all' || data === 'select-none') {
         event.stopPropagation();
         const inputs = this._itemsParent.querySelectorAll('input');

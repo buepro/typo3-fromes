@@ -13,8 +13,8 @@ export class FmAbstractList extends LitElement {
 
   constructor() {
     super();
-    let itemTemplate = this.querySelector('[data-filter="item-template"]');
-    itemTemplate.removeAttribute('data-filter');
+    let itemTemplate = this.querySelector('[data-fromes="item-template"]');
+    itemTemplate.removeAttribute('data-fromes');
     this._itemsParent = itemTemplate.parentNode;
     this._itemTemplate = itemTemplate.cloneNode(true);
     itemTemplate.remove();

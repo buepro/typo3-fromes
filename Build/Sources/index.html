@@ -22,19 +22,19 @@
             }
         ]}'>
         <form action="/" method="post">
-            <input data-filter="status" name="tx_fromes_messenger[filterStatus]" type="hidden" />
+            <input data-fromes="status" name="tx_fromes_messenger[filterStatus]" type="hidden" />
         </form>
 
         <fm-select-list id="checkbox1">
             <h4>Frontend user group</h4>
             <div class="mb-2">
                 <div class="btn-group btn-group-sm" role="group" aria-label="List item selections">
-                    <button type="button" class="btn btn-primary" data-filter="select-all">All</button>
-                    <button type="button" class="btn btn-primary" data-filter="select-none">None</button>
+                    <button type="button" class="btn btn-primary" data-fromes="select-all">All</button>
+                    <button type="button" class="btn btn-primary" data-fromes="select-none">None</button>
                 </div>
             </div>
             <div class="fmc-checkbox-wrap">
-                <div class="form-check" data-filter="item-template">
+                <div class="form-check" data-fromes="item-template">
                     <input class="form-check-input" type="checkbox">
                     <label class="form-check-label">Default checkbox</label>
                 </div>
@@ -44,15 +44,15 @@
     </fm-filter>
 
     <fm-select-list id="fm-filter-result">
-        <div class="mb-4"><button class="btn btn-primary">Add data</button></div>
+        <div class="mb-4"><button class="btn btn-primary" id="fm-filter-result-add">Add data</button></div>
         <div class="mb-2">
             <div class="btn-group btn-group-sm" role="group" aria-label="List item selections">
-                <button type="button" class="btn btn-primary" data-filter="select-all">All</button>
-                <button type="button" class="btn btn-primary" data-filter="select-none">None</button>
+                <button type="button" class="btn btn-primary" data-fromes="select-all">All</button>
+                <button type="button" class="btn btn-primary" data-fromes="select-none">None</button>
             </div>
         </div>
         <ul class="nav fmc-list flex-column">
-            <li class="form-check" data-filter="item-template">
+            <li class="form-check" data-fromes="item-template">
                 <input class="form-check-input" type="checkbox" />
                 <label class="form-check-label">_labelText</label>
             </li>
@@ -61,9 +61,9 @@
 
     <fm-collector id="fm-receivers">
         <button class="btn btn-primary me-4 mb-4">Get from list</button>
-        <span class="fmc-close" data-filter="clear"></span>
+        <span class="fmc-close" data-fromes="clear"></span>
         <ul class="list-inline">
-            <li class="list-inline-item" data-filter="item-template"><span data-filter="label">Hans Meier</span></li>
+            <li class="list-inline-item" data-fromes="item-template"><span data-fromes="label">Hans Meier</span></li>
         </ul>
     </fm-collector>
 

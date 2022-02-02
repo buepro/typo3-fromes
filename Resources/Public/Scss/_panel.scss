@@ -1,9 +1,5 @@
 .fm-messenger {
-    //
-    // Template and partials: general
-    //
     .fmc-panel {
-        display: block;
         position: relative;
         margin: 1rem 0;
         padding: var(--fm-panel-padding);
@@ -14,6 +10,7 @@
         padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
     }
     .fmc-control {
+        position: relative;
         background: var(--fm-panel-bg-light);
         padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
     }
@@ -32,19 +29,12 @@
             padding-right: 1.5em;
         }
     }
-    .checkbox-inline {
-        min-width: 10em;
-    }
     .form-group:last-child {
         margin-bottom: 0;
     }
     .fmc-p-0 {
         padding: 0;
     }
-
-    //
-    // Template and partials: components
-    //
     .fmc-add-receivers {
         text-align: center;
         .btn {
@@ -60,20 +50,34 @@
 //
 // Components
 //
+fm-filter, fm-select-list, fm-mail, fm-collector {
+    display: block;
+}
+fm-mail {
+    .alert {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+}
 fm-collector {
     .fmc-close {
         display: block;
         position: absolute;
-        right: 0;
-        top: 0;
+        right: var(--fm-panel-padding);
+        top: var(--fm-panel-padding);
         padding: 0 0.3rem;
         cursor: pointer;
         svg {
             width: 16px;
         }
     }
-    ul {
-        margin-bottom: 0;
+    ul.form-control {
+        min-height: 3em;
+        margin: calc(var(--fm-panel-padding) / 2) 0;
+        background-color: $input-disabled-bg;
+        li.fmc-default {
+            color: $input-placeholder-color;
+        }
         span:after {
             content: ', ';
         }

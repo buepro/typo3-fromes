@@ -9,6 +9,9 @@
 			<trans-unit id="availableUsers" resname="availableUsers">
 				<source>Available users</source>
 			</trans-unit>
+			<trans-unit id="email" resname="email">
+				<source>Email</source>
+			</trans-unit>
 			<trans-unit id="receivers" resname="receivers">
 				<source>Receivers</source>
 			</trans-unit>

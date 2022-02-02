@@ -2,86 +2,23 @@
 <f:layout name="Default" />
 <f:debug>{_all}</f:debug>
 <f:section name="Filter">
-
     <fm-filter class="fm-filter" data-config="{filterConfig -> f:format.json()}" id="fm-filter">
         <f:form absolute="1" action="filter" method="post" name="filter">
             <f:form.hidden data="{fromes: 'status'}" name="filterStatus" />
         </f:form>
         <fm-select-list class="fmc-subfilter fmc-panel fmc-p-0" id="user-group">
-            <h4 class="fmc-title">{f:translate(key: 'userGroup')}</h4>
-            <div class="fmc-control">
-                <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'listItemSelection')}">
-                    <button type="button" class="btn btn-primary" data-fromes="select-all">{f:translate(key: 'all')}</button>
-                    <button type="button" class="btn btn-primary" data-fromes="select-none">{f:translate(key: 'none')}</button>
-                </div>
-            </div>
-            <div class="form-group fmc-content fmc-list">
-                <div class="form-check" data-fromes="item-template">
-                    <input class="form-check-input" type="checkbox" name="" value="">
-                    <label class="form-check-label">
-                        Default checkbox
-                    </label>
-                </div>
-            </div>
+            <f:render partial="Components/ListHeader" arguments="{titleKey: 'userGroup'}" />
+            <f:render partial="Components/ListControl" />
+            <f:render partial="Components/ListContent" />
         </fm-select-list>
     </fm-filter>
-
-    <!--div id="fm-filter2" class="fmc-panel fmc-filter">
-        <f:form name="filterDto" object="{filterDto}">
-            <div class="form-group">
-                <div class="checkbox-inline form-check form-check-inline">
-                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-typeLeader" property="typeLeader" value="1" />
-                    <label class="form-check-label" for="tx-grevman-field-typeLeader">{f:translate(key: 'leader')}</label>
-                </div>
-                <div class="checkbox-inline form-check form-check-inline">
-                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-typeParticipant" property="typeParticipant" value="1" />
-                    <label class="form-check-label" for="tx-grevman-field-typeParticipant">{f:translate(key: 'participant')}</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox-inline form-check form-check-inline">
-                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-pastEvents" property="pastEvents" value="1" />
-                    <label class="form-check-label" for="tx-grevman-field-pastEvents">{f:translate(key: 'pastEvents')}</label>
-                </div>
-                <div class="checkbox-inline form-check form-check-inline">
-                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-futureEvents" property="futureEvents" value="1" />
-                    <label class="form-check-label" for="tx-grevman-field-futureEvents">{f:translate(key: 'futureEvents')}</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <f:render partial="Messenger/Selector" arguments="{_all}"/>
-            </div>
-            <div class="form-group">
-                <div class="checkbox-inline form-check form-check-inline">
-                    <f:form.checkbox class="form-check-input" id="tx-grevman-field-groups" property="groups" value="1" />
-                    <label class="form-check-label" for="tx-grevman-field-groups">Groups</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <f:render partial="Messenger/Selector" arguments="{_all}"/>
-            </div>
-            <div class="form-group">
-                <f:form.textfield class="form-control" placeholder="{f:translate(key: 'searchUser')}" property="user"/>
-            </div>
-        </f:form>
-    </div-->
 </f:section>
 
 <f:section name="Result">
     <fm-select-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
-        <h4 class="fmc-title">{f:translate(key: 'availableUsers')}</h4>
-        <div class="fmc-control">
-            <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'listItemSelection')}">
-                <button type="button" class="btn btn-primary" data-fromes="select-all">{f:translate(key: 'all')}</button>
-                <button type="button" class="btn btn-primary" data-fromes="select-none">{f:translate(key: 'none')}</button>
-            </div>
-        </div>
-        <ul class="nav fmc-content fmc-list">
-            <li class="form-check" data-fromes="item-template">
-                <input class="form-check-input" type="checkbox" />
-                <label class="form-check-label">_labelText</label>
-            </li>
-        </ul>
+        <f:render partial="Components/ListHeader" arguments="{titleKey: 'availableUsers'}" />
+        <f:render partial="Components/ListControl" />
+        <f:render partial="Components/ListContent" />
     </fm-select-list>
 </f:section>
 
@@ -91,36 +28,33 @@
     </div>
 </f:section>
 
-<f:section name="Receivers">
-    <fm-collector class="fmc-recipients fmc-panel fmc-p-0" id="fm-receivers">
-        <h4 class="fmc-title">{f:translate(key: 'receivers')}</h4>
-        <div class="fmc-content">
-            <span class="fmc-close" data-fromes="clear">{f:render(partial: 'Icons/Bin')}</span>
-            <ul class="list-inline">
-                <li class="list-inline-item" data-fromes="item-template"><span data-fromes="label">Hans Meier</span></li>
-            </ul>
-        </div>
-    </fm-collector>
-</f:section>
-
-<f:section name="Mail">
-    <fm-mail class="fmc-panel fmc-mail" data-fromes="{mailConfig -> f:format.json()}" id="fm-mail">
+<f:section name="Email">
+    <fm-mail class="fmc-panel fmc-mail fmc-p-0" data-fromes="{mailConfig -> f:format.json()}" id="fm-email">
+        <f:render partial="Components/ListHeader" arguments="{titleKey: 'email'}" />
         <div class="alert alert-success d-none" data-fromes="mail-success" role="alert">
             {f:translate(key: 'mailSuccess')}
         </div>
         <div class="alert alert-danger d-none" data-fromes="mail-error" role="alert">
             {f:translate(key: 'mailError')}
         </div>
-        <f:form absolute="1" action="mail" method="post">
-            <div class="form-group">
-                <f:form.textfield class="form-control" data="{fromes: 'subject'}" name="mailFormData[subject]" placeholder="{f:translate(key: 'subject')}*" />
-            </div>
-            <div class="form-group">
-                <f:form.textarea class="form-control" data="{fromes: 'message'}" name="mailFormData[message]" placeholder="{f:translate(key: 'message')}*" />
-            </div>
-            <f:form.hidden data="{fromes: 'receivers'}" name="mailFormData[receivers]" />
-        </f:form>
-        <button class="btn btn-primary" data-fromes="submit">{f:translate(key: 'send')}</button>
+        <fm-collector class="fmc-receivers fmc-control" id="fm-receivers">
+            <span class="fmc-close" data-fromes="clear">{f:render(partial: 'Icons/Bin')}</span>
+            <ul class="list-inline form-control">
+                <li class="list-inline-item" data-fromes="item-template"><span data-fromes="label">{f:translate(key: 'receivers')}</span></li>
+            </ul>
+        </fm-collector>
+        <div class="fmc-content">
+            <f:form absolute="1" action="mail" method="post">
+                <div class="form-group">
+                    <f:form.textfield class="form-control" data="{fromes: 'subject'}" name="mailFormData[subject]" placeholder="{f:translate(key: 'subject')}*" />
+                </div>
+                <div class="form-group">
+                    <f:form.textarea class="form-control" data="{fromes: 'message'}" name="mailFormData[message]" placeholder="{f:translate(key: 'message')}*" />
+                </div>
+                <f:form.hidden data="{fromes: 'receivers'}" name="mailFormData[receivers]" />
+            </f:form>
+            <button class="btn btn-primary" data-fromes="submit">{f:translate(key: 'send')}</button>
+        </div>
     </fm-mail>
 </f:section>
 </html>

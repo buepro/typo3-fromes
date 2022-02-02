@@ -15,13 +15,26 @@ export class FmCollector extends FmAbstractList {
     return node;
   }
 
-  render() {
+  renderClearIcon() {
     let clearNode = this.querySelector('[data-fromes="clear"]');
     clearNode.classList.add('invisible');
     if (this.items && this.items.length > 0) {
       clearNode.classList.remove('invisible');
     }
+  }
+
+  renderDefaultContent() {
+    if (!this.items || this.items.length === 0) {
+      const node = this._itemTemplate.cloneNode(true);
+      node.classList.add('fmc-default');
+      this._itemsParent.appendChild(node);
+    }
+  }
+
+  render() {
+    this.renderClearIcon()
     FmAbstractList.prototype.render.call(this);
+    this.renderDefaultContent();
   }
 
   handleClearClickEvent(event) {

@@ -17,7 +17,6 @@
 }
 
 .fm-messenger .fmc-panel {
-  display: block;
   position: relative;
   margin: 1rem 0;
   padding: var(--fm-panel-padding);
@@ -28,6 +27,7 @@
   padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
 }
 .fm-messenger .fmc-control {
+  position: relative;
   background: var(--fm-panel-bg-light);
   padding: calc(var(--fm-panel-padding) / 2) var(--fm-panel-padding);
 }
@@ -46,9 +46,6 @@
   width: var(--fm-listitem-width);
   padding-right: 1.5em;
 }
-.fm-messenger .checkbox-inline {
-  min-width: 10em;
-}
 .fm-messenger .form-group:last-child {
   margin-bottom: 0;
 }
@@ -66,24 +63,38 @@
   transform: rotate(90deg);
 }
 
+fm-filter, fm-select-list, fm-mail, fm-collector {
+  display: block;
+}
+
+fm-mail .alert {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
 fm-collector .fmc-close {
   display: block;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: var(--fm-panel-padding);
+  top: var(--fm-panel-padding);
   padding: 0 0.3rem;
   cursor: pointer;
 }
 fm-collector .fmc-close svg {
   width: 16px;
 }
-fm-collector ul {
-  margin-bottom: 0;
+fm-collector ul.form-control {
+  min-height: 3em;
+  margin: calc(var(--fm-panel-padding) / 2) 0;
+  background-color: #e9e9e9;
 }
-fm-collector ul span:after {
+fm-collector ul.form-control li.fmc-default {
+  color: #6c6c6c;
+}
+fm-collector ul.form-control span:after {
   content: ", ";
 }
-fm-collector ul li:last-child span:after {
+fm-collector ul.form-control li:last-child span:after {
   content: "";
 }
 

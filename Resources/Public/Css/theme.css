@@ -63,11 +63,11 @@
   transform: rotate(90deg);
 }
 
-fm-filter, fm-select-list, fm-mail, fm-collector {
+fm-filter, fm-select-list, fm-email, fm-collector {
   display: block;
 }
 
-fm-mail .alert {
+fm-email .alert {
   margin-bottom: 0;
   border-radius: 0;
 }

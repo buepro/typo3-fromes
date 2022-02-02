@@ -29,7 +29,7 @@
 </f:section>
 
 <f:section name="Email">
-    <fm-mail class="fmc-panel fmc-mail fmc-p-0" data-fromes="{mailConfig -> f:format.json()}" id="fm-email">
+    <fm-email class="fmc-panel fmc-email fmc-p-0" data-fromes="{mailConfig -> f:format.json()}" id="fm-email">
         <f:render partial="Components/ListHeader" arguments="{titleKey: 'email'}" />
         <div class="alert alert-success d-none" data-fromes="mail-success" role="alert">
             {f:translate(key: 'mailSuccess')}
@@ -55,6 +55,6 @@
             </f:form>
             <button class="btn btn-primary" data-fromes="submit">{f:translate(key: 'send')}</button>
         </div>
-    </fm-mail>
+    </fm-email>
 </f:section>
 </html>

@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 
-export class FmMail extends LitElement {
+export class FmEmail extends LitElement {
 
   _form = null;
   _subject = null;
@@ -107,4 +107,4 @@ export class FmMail extends LitElement {
   }
 }
 
-customElements.define('fm-mail', FmMail);
+customElements.define('fm-email', FmEmail);

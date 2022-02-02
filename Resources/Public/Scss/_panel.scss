@@ -73,6 +73,7 @@ fm-collector {
     }
     ul.form-control {
         min-height: 3em;
+        height: auto;
         margin: calc(var(--fm-panel-padding) / 2) 0;
         background-color: $input-disabled-bg;
         li.fmc-default {

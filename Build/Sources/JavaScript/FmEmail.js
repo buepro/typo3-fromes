@@ -79,7 +79,10 @@ export class FmEmail extends LitElement {
       })
       .then(data => {
         this.showSuccessMessage();
-        console.log('Success:', data);
+        this._receiversCollector.items = [];
+        this._subject.value = '';
+        this._message.value = '';
+        // console.log('Success:', data);
       })
       .catch((error) => {
         this.showErrorMessage();

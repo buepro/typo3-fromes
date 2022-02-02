@@ -1,5 +1,4 @@
 import "./FmFilter";
-import "./FmFilterCheckbox";
-import "./FmList";
+import "./FmSelectList";
 import "./FmCollector";
 import "./FmMail";

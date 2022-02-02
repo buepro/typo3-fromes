@@ -3,6 +3,15 @@
 	<file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes">
 		<header/>
 		<body>
+			<trans-unit id="userGroup" resname="userGroup">
+				<source>User group</source>
+			</trans-unit>
+			<trans-unit id="availableUsers" resname="availableUsers">
+				<source>Available users</source>
+			</trans-unit>
+			<trans-unit id="receivers" resname="receivers">
+				<source>Receivers</source>
+			</trans-unit>
 			<trans-unit id="listItemSelection" resname="listItemSelection">
 				<source>List item selection</source>
 			</trans-unit>
@@ -21,23 +30,11 @@
 			<trans-unit id="send" resname="send">
 				<source>Send</source>
 			</trans-unit>
-			<trans-unit id="leader" resname="leader">
-				<source>Leader</source>
+			<trans-unit id="mailSuccess" resname="mailSuccess">
+				<source>The message was sent successfully.</source>
 			</trans-unit>
-			<trans-unit id="participant" resname="participant">
-				<source>Participant</source>
-			</trans-unit>
-			<trans-unit id="pastEvents" resname="pastEvents">
-				<source>Past events</source>
-			</trans-unit>
-			<trans-unit id="futureEvents" resname="futureEvents">
-				<source>Upcoming events</source>
-			</trans-unit>
-			<trans-unit id="user" resname="user">
-				<source>User</source>
-			</trans-unit>
-			<trans-unit id="searchUser" resname="searchUser">
-				<source>Search user by name or email</source>
+			<trans-unit id="mailError" resname="mailError">
+				<source>A problem occurred when trying to send the message. Please contact the system administrator</source>
 			</trans-unit>
 		</body>
 	</file>

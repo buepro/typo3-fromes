@@ -12,7 +12,7 @@ export class FmFilter extends LitElement {
   constructor() {
     super();
     this._form = this.removeChild(this.getElementsByTagName('form')[0]);
-    this.addEventListener('change', this.handleChangeEvent);
+    this.addEventListener('fromes-process-change', this.handleChangeEvent.bind(this));
   }
 
   createRenderRoot() {

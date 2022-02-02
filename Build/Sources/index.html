@@ -25,19 +25,25 @@
             <input data-filter="status" name="tx_fromes_messenger[filterStatus]" type="hidden" />
         </form>
 
-        <fm-filter-checkbox id="checkbox1">
+        <fm-select-list id="checkbox1">
             <h4>Frontend user group</h4>
+            <div class="mb-2">
+                <div class="btn-group btn-group-sm" role="group" aria-label="List item selections">
+                    <button type="button" class="btn btn-primary" data-filter="select-all">All</button>
+                    <button type="button" class="btn btn-primary" data-filter="select-none">None</button>
+                </div>
+            </div>
             <div class="fmc-checkbox-wrap">
                 <div class="form-check" data-filter="item-template">
                     <input class="form-check-input" type="checkbox">
                     <label class="form-check-label">Default checkbox</label>
                 </div>
             </div>
-        </fm-filter-checkbox>
+        </fm-select-list>
 
     </fm-filter>
 
-    <fm-list id="fm-filter-result">
+    <fm-select-list id="fm-filter-result">
         <div class="mb-4"><button class="btn btn-primary">Add data</button></div>
         <div class="mb-2">
             <div class="btn-group btn-group-sm" role="group" aria-label="List item selections">
@@ -51,7 +57,7 @@
                 <label class="form-check-label">_labelText</label>
             </li>
         </ul>
-    </fm-list>
+    </fm-select-list>
 
     <fm-collector id="fm-receivers">
         <button class="btn btn-primary me-4 mb-4">Get from list</button>
@@ -82,8 +88,7 @@
 </div>
 
 <script type="module" src="./JavaScript/FmFilter.js" ></script>
-<script type="module" src="./JavaScript/FmFilterCheckbox.js" ></script>
-<script type="module" src="./JavaScript/FmList.js" ></script>
+<script type="module" src="./JavaScript/FmSelectList.js" ></script>
 <script type="module" src="./JavaScript/FmCollector.js" ></script>
 <script type="module" src="./JavaScript/FmMail.js" ></script>
 <script src="index.js"></script>

@@ -1,28 +1,12 @@
-import { FmAbstractItems } from "./FmAbstractItems";
+import { FmAbstractList } from "./FmAbstractList";
 
 /**
- * Collects items where an item is an object.
- * In case the items contain an id property it will be used to ensure an element is just collected once.
+ * Collected items can be cleared.
  */
-export class FmCollector extends FmAbstractItems {
+export class FmCollector extends FmAbstractList {
   constructor() {
     super();
     this.querySelector('[data-filter="clear"]').addEventListener('click', this.handleClearClickEvent.bind(this));
-  }
-
-  addItems(newItems) {
-    const items = this.items ?? [];
-    newItems.forEach(function (newItem) {
-      if (newItem.id) {
-        let found = items.find(item => newItem.id === item.id)
-        if (found) {
-          return;
-        }
-      }
-      items.push(newItem);
-    });
-    this.items = items;
-    this.render();
   }
 
   getItemNode(item, counter) {
@@ -37,7 +21,7 @@ export class FmCollector extends FmAbstractItems {
     if (this.items && this.items.length > 0) {
       clearNode.classList.remove('invisible');
     }
-    FmAbstractItems.prototype.render.call(this);
+    FmAbstractList.prototype.render.call(this);
   }
 
   handleClearClickEvent(event) {

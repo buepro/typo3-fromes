@@ -6,7 +6,7 @@
 
   // DOM ready
   ready(() => {
-    document.querySelector('fm-list button').addEventListener('click', function () {
+    document.querySelector('fm-select-list button').addEventListener('click', function () {
       document.getElementById('fm-filter-result').items = [
         { id: 1, label: 'Name 1', email: 'name1@email.go' },
         { id: 5, label: 'Name 2', email: 'name2@email.go' },

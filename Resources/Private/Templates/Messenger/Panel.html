@@ -7,8 +7,14 @@
         <f:form absolute="1" action="filter" method="post" name="filter">
             <f:form.hidden data="{filter: 'status'}" name="filterStatus" />
         </f:form>
-        <fm-filter-checkbox class="fmc-subfilter fmc-panel fmc-p-0" id="user-group">
-            <h4 class="fmc-title">User group</h4>
+        <fm-select-list class="fmc-subfilter fmc-panel fmc-p-0" id="user-group">
+            <h4 class="fmc-title">{f:translate(key: 'userGroup')}</h4>
+            <div class="fmc-control">
+                <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'listItemSelection')}">
+                    <button type="button" class="btn btn-primary" data-filter="select-all">{f:translate(key: 'all')}</button>
+                    <button type="button" class="btn btn-primary" data-filter="select-none">{f:translate(key: 'none')}</button>
+                </div>
+            </div>
             <div class="form-group fmc-content fmc-list">
                 <div class="form-check" data-filter="item-template">
                     <input class="form-check-input" type="checkbox" name="" value="">
@@ -17,7 +23,7 @@
                     </label>
                 </div>
             </div>
-        </fm-filter-checkbox>
+        </fm-select-list>
     </fm-filter>
 
     <!--div id="fm-filter2" class="fmc-panel fmc-filter">
@@ -62,8 +68,8 @@
 </f:section>
 
 <f:section name="Result">
-    <fm-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
-        <h4 class="fmc-title">Available users</h4>
+    <fm-select-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
+        <h4 class="fmc-title">{f:translate(key: 'availableUsers')}</h4>
         <div class="fmc-control">
             <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'listItemSelection')}">
                 <button type="button" class="btn btn-primary" data-filter="select-all">{f:translate(key: 'all')}</button>
@@ -76,7 +82,7 @@
                 <label class="form-check-label">_labelText</label>
             </li>
         </ul>
-    </fm-list>
+    </fm-select-list>
 </f:section>
 
 <f:section name="AddReceivers">
@@ -87,7 +93,7 @@
 
 <f:section name="Receivers">
     <fm-collector class="fmc-recipients fmc-panel fmc-p-0" id="fm-receivers">
-        <h4 class="fmc-title">Receivers</h4>
+        <h4 class="fmc-title">{f:translate(key: 'receivers')}</h4>
         <div class="fmc-content">
             <span class="fmc-close" data-filter="clear">{f:render(partial: 'Icons/Bin')}</span>
             <ul class="list-inline">
@@ -100,10 +106,10 @@
 <f:section name="Mail">
     <fm-mail class="fmc-panel fmc-mail" data-fromes="{mailConfig -> f:format.json()}" id="fm-mail">
         <div class="alert alert-success d-none" data-fromes="mail-success" role="alert">
-            The message was sent successfully.
+            {f:translate(key: 'mailSuccess')}
         </div>
         <div class="alert alert-danger d-none" data-fromes="mail-error" role="alert">
-            A problem occurred when trying to send the message. Please contact the system administrator
+            {f:translate(key: 'mailError')}
         </div>
         <f:form absolute="1" action="mail" method="post">
             <div class="form-group">

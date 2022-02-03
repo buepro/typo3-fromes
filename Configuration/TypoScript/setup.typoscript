@@ -38,8 +38,8 @@ plugin.tx_fromes_messenger {
         items {
           table = fe_groups
           select {
-            pidInList = 3
-            uidInList = 1,2,3
+            pidInList = {$plugin.tx_fromes_events.settings.subfilters.feUserGroup.items.select.pidInList}
+            uidInList = {$plugin.tx_fromes_events.settings.subfilters.feUserGroup.items.select.uidInList}
           }
           fieldMap {
             id = uid

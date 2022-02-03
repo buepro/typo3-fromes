@@ -1,5 +1,5 @@
 # customsubcategory=010=Files
-# customsubcategory=110=Storage
+# customsubcategory=610=Subfilter frontend user group (feUserGroup)
 
 plugin.tx_fromes_events {
   view {
@@ -10,8 +10,18 @@ plugin.tx_fromes_events {
     # cat=plugin.tx_fromes_events/010/030; type=string; label=Path to template layouts (FE)
     layoutRootPath = EXT:fromes/Resources/Private/Layouts/
   }
-  persistence {
-    # cat=plugin.tx_fromes_events/110/a; type=string; label=Default storage PID:List of uid's from pages where records are stored. List first the `uid` from the folder where the fromes related records are stored.
-    storagePid = 224,225,226
+  settings {
+    subfilters {
+      feUserGroup {
+        items {
+          select {
+            # cat=plugin.tx_fromes_events/610/010; type=string; label=User groups PIDs:Coma separated list of uid's where frontend user groups are stored
+            pidInList = 3
+            # cat=plugin.tx_fromes_events/610/020; type=string; label=User groups UIDs:Coma separated list of uid's from selectable frontend user groups
+            uidInList = 1,2,3
+          }
+        }
+      }
+    }
   }
 }

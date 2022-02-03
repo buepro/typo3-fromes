@@ -1,3 +1,3 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<h4 class="fmc-title">{f:translate(key: titleKey)}</h4>
+<h4 class="fmc-title">{f:translate(key: '{titleKey as string}', default: title)}</h4>
 </html>

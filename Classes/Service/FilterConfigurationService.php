@@ -9,6 +9,7 @@
 
 namespace Buepro\Fromes\Service;
 
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -45,7 +46,11 @@ class FilterConfigurationService
     protected function getFilterItemsFromTypoScript(array $conf): array
     {
         $cObjRenderer = new ContentObjectRenderer();
-        $items = $cObjRenderer->getRecords($conf['table'], $conf['select']);
+        $tsService = GeneralUtility::makeInstance(TypoScriptService::class);
+        $items = $cObjRenderer->getRecords(
+            $conf['table'],
+            $tsService->convertPlainArrayToTypoScriptArray($conf['select'])
+        );
         return array_map(function ($item) use ($conf): array {
             $filtered = [];
             foreach ($conf['fieldMap'] as $key => $field) {

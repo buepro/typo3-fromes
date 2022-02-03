@@ -45,10 +45,6 @@
 		"typo3/cms-lowlevel": "^10.4 || ^11.5.1",
 		"typo3/cms-recycler": "^10.4 || ^11.5.1"
 	},
-	"replace": {
-		"buepro/typo3-fromes": "self.version",
-		"typo3-ter/fromes": "self.version"
-	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"autoload": {

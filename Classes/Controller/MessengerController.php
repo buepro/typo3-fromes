@@ -13,7 +13,7 @@ namespace Buepro\Fromes\Controller;
 
 use Buepro\Fromes\Domain\DTO\MailFormData;
 use Buepro\Fromes\Domain\Model\Filter;
-use Buepro\Fromes\Domain\Repository\RecipientRepository;
+use Buepro\Fromes\Domain\Repository\ReceiverRepository;
 use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,12 +25,12 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class MessengerController extends ActionController
 {
-    /** @var RecipientRepository */
-    protected $recipientRepository;
+    /** @var ReceiverRepository */
+    protected $receiverRepository;
 
-    public function injectRecipientRepository(RecipientRepository $recipientRepository): void
+    public function injectReceiverRepository(ReceiverRepository $receiverRepository): void
     {
-        $this->recipientRepository = $recipientRepository;
+        $this->receiverRepository = $receiverRepository;
     }
 
     public function panelAction(): void
@@ -55,8 +55,8 @@ class MessengerController extends ActionController
         $filterStatus = (json_decode($filterStatus, false, 512, JSON_THROW_ON_ERROR));
         if ($filterStatus instanceof \stdClass && property_exists($filterStatus, 'data')) {
             $filter = new Filter($this->settings, $filterStatus->data);
-            $recipients = $this->recipientRepository->getForFilter($filter);
-            return json_encode($recipients, JSON_THROW_ON_ERROR);
+            $receivers = $this->receiverRepository->getForFilter($filter);
+            return json_encode($receivers, JSON_THROW_ON_ERROR);
         }
         return json_encode([], JSON_THROW_ON_ERROR);
     }
@@ -76,7 +76,7 @@ class MessengerController extends ActionController
             throw new \LogicException('Mail delivery failed. The email address from the system user or the '
                 . 'registered user is not correct.', 1643390458);
         }
-        $receivers = $this->recipientRepository->getForUidList($mailFormData->getReceivers());
+        $receivers = $this->receiverRepository->getForUidList($mailFormData->getReceivers());
         if (count($receivers) === 0) {
             throw new \LogicException('Mail delivery failed. The requested receivers are not available.', 1643384193);
         }

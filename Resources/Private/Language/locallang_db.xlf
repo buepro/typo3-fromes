@@ -7,7 +7,7 @@
 				<source>Email messenger</source>
 			</trans-unit>
 			<trans-unit id="tx_fromes_messenger.description" resname="tx_fromes_messenger.description">
-				<source>Email client with a flexible recipient filter.</source>
+				<source>Email client with a flexible receiver filter.</source>
 			</trans-unit>
 		</body>
 	</file>

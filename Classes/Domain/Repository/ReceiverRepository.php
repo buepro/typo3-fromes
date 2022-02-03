@@ -18,16 +18,16 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * The repository for Registrations
+ * The repository for Receivers
  */
-class RecipientRepository
+class ReceiverRepository
 {
     public function getForFilter(Filter $filter): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
-            ->select('uid', 'first_name', 'last_name', 'name', 'email')
-            ->from('fe_users');
+            ->select('users.uid', 'users.first_name', 'users.last_name', 'users.name', 'users.email')
+            ->from('fe_users', 'users');
         $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
         $result = [];
         foreach ($rows as $row) {

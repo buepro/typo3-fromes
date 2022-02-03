@@ -30,7 +30,7 @@ interface SubfilterInterface
     public function getConfigForWebComponent(): array;
 
     /**
-     * @param QueryBuilder $queryBuilder Provided by the RecipientRepository
+     * @param QueryBuilder $queryBuilder Provided by the ReceiverRepository
      */
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder;
 }

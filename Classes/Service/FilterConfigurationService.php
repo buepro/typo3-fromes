@@ -45,18 +45,20 @@ class FilterConfigurationService
 
     protected function getFilterItemsFromTypoScript(array $conf): array
     {
-        $cObjRenderer = new ContentObjectRenderer();
+        $cObj = new ContentObjectRenderer();
         $tsService = GeneralUtility::makeInstance(TypoScriptService::class);
-        $items = $cObjRenderer->getRecords(
-            $conf['table'],
-            $tsService->convertPlainArrayToTypoScriptArray($conf['select'])
-        );
-        return array_map(function ($item) use ($conf): array {
+        $tsConf = $tsService->convertPlainArrayToTypoScriptArray($conf);
+        $items = $cObj->getRecords($conf['table'], $tsConf['select.']);
+        return array_map(static function ($item) use ($cObj, $conf, $tsConf): array {
             $filtered = [];
+            $cObj->data = $item;
             foreach ($conf['fieldMap'] as $key => $field) {
-                if (isset($item[$field])) {
-                    $filtered[$key] = $item[$field];
+                $value = is_array($field) ? '' : (string)$item[$field];
+                $keyDot = $key . '.';
+                if (isset($tsConf['fieldMap.'][$keyDot])) {
+                    $value = $cObj->stdWrap($tsConf['fieldMap.'][$key] ?? '', $tsConf['fieldMap.'][$keyDot]);
                 }
+                $filtered[$key] = $value;
             }
             return $filtered;
         }, $items);

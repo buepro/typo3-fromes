@@ -38,10 +38,12 @@ plugin.tx_fromes_messenger {
         items {
           table = fe_groups
           select {
+            // Properties from TS select function
             pidInList = {$plugin.tx_fromes_events.settings.subfilters.feUserGroup.items.select.pidInList}
             uidInList = {$plugin.tx_fromes_events.settings.subfilters.feUserGroup.items.select.uidInList}
           }
           fieldMap {
+            // All fieldMap properties are of data type stdWrap
             id = uid
             label = title
           }

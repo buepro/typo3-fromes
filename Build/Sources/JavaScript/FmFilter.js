@@ -55,7 +55,7 @@ export class FmFilter extends LitElement {
     })
       .then(response => response.json())
       .then(data => {
-        document.getElementById(this.config.resultElementId).items = data;
+        document.getElementById(this.config.resultComponentId).items = data;
       })
       .catch((error) => {
         console.error('Error on receiving filter response', { code: '1643214279', error: error });

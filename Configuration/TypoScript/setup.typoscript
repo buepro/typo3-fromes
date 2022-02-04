@@ -28,11 +28,11 @@ plugin.tx_fromes_messenger {
   settings {
     filter {
       includedSubfilters = feUserGroup
-      resultElementId = fm-list
+      resultComponentId = fm-list
     }
     subfilters {
       feUserGroup {
-        id = user-group
+        componentId = user-group
         class = \Buepro\Fromes\Domain\Model\UserGroupSubfilter
         items = TypoScript
         items {
@@ -50,8 +50,8 @@ plugin.tx_fromes_messenger {
         }
       }
     }
-    receiversCollector {
-      id = fm-receivers
+    email {
+      receiversComponentId = fm-receivers
     }
   }
 }

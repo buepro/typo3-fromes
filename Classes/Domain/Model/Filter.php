@@ -46,7 +46,7 @@ class Filter implements SubfilterInterface
         }
         return [
             'accessToken' => (new SessionService())->getAccessToken(),
-            'resultElementId' => $this->settings['filter']['resultElementId'] ?? 'undefined',
+            'resultComponentId' => $this->settings['filter']['resultComponentId'] ?? 'undefined',
             'jsonFilter' => $subfilterConfig,
         ];
     }
@@ -73,7 +73,7 @@ class Filter implements SubfilterInterface
     {
         $result = [];
         foreach ($this->settings['subfilters'] as $subfilterSetting) {
-            if ($subfilterSetting['id'] == $id) {
+            if ($subfilterSetting['componentId'] == $id) {
                 return $subfilterSetting;
             }
         }

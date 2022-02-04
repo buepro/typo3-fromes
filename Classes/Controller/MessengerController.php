@@ -37,9 +37,9 @@ class MessengerController extends ActionController
     {
         $this->view->assignMultiple([
             'filterConfig' => (new Filter($this->settings))->getConfigForWebComponent(),
-            'mailConfig' => [
+            'emailConfig' => [
                 'accessToken' => (new SessionService())->getAccessToken(),
-                'receiversCollectorId' => $this->settings['receiversCollector']['id'] ?? '',
+                'receiversComponentId' => $this->settings['email']['receiversComponentId'] ?? '',
             ]
         ]);
     }

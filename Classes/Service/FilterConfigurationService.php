@@ -26,11 +26,11 @@ class FilterConfigurationService
     public function getSubfilterConfig(): array
     {
         if (
-            isset($this->settings['items'], $this->settings['id']) && $this->settings['id'] !== '' &&
+            isset($this->settings['items'], $this->settings['componentId']) && $this->settings['componentId'] !== '' &&
             ($method = $this->getFilterItemsMethodName($this->settings['items'])) !== null
         ) {
             return [
-                'id' => $this->settings['id'],
+                'id' => $this->settings['componentId'],
                 'items' => $this->$method($this->settings['items']),
             ];
         }

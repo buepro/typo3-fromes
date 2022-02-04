@@ -6,7 +6,7 @@ export class FmEmail extends LitElement {
   _subject = null;
   _message = null;
   _submitButton = null;
-  _receiversCollector = null;
+  _receiversComponent = null;
 
   static properties = {
     config: { type: Object, attribute: 'data-fromes' }
@@ -19,14 +19,14 @@ export class FmEmail extends LitElement {
     this._subject = this.querySelector('[data-fromes="subject"]');
     this._message = this.querySelector('[data-fromes="message"]');
     this._submitButton = this.querySelector('[data-fromes="submit"]');
-    this._receiversCollector = document.getElementById(_config.receiversCollectorId);
+    this._receiversComponent = document.getElementById(_config.receiversComponentId);
     this._subject.value = '';
     this._message.value = '';
     this._submitButton.classList.add('disabled');
     this._subject.addEventListener('keyup', this.renderSubmitButton.bind(this));
     this._message.addEventListener('keyup', this.renderSubmitButton.bind(this));
     this._submitButton.addEventListener('click', this.handleFormSubmitEvent.bind(this));
-    this._receiversCollector.addEventListener('change', this.renderSubmitButton.bind(this));
+    this._receiversComponent.addEventListener('change', this.renderSubmitButton.bind(this));
   }
 
   createRenderRoot() {
@@ -38,7 +38,7 @@ export class FmEmail extends LitElement {
     if (!this.canSubmit()) {
       return;
     }
-    const items = this._receiversCollector.items;
+    const items = this._receiversComponent.items;
     const itemIds = items.map(item => item.id);
     this._form.querySelector('[data-fromes="receivers"]').value = JSON.stringify(itemIds);
     this.createServerRequest();
@@ -79,7 +79,7 @@ export class FmEmail extends LitElement {
       })
       .then(data => {
         this.showSuccessMessage();
-        this._receiversCollector.items = [];
+        this._receiversComponent.items = [];
         this._subject.value = '';
         this._message.value = '';
         // console.log('Success:', data);
@@ -93,7 +93,7 @@ export class FmEmail extends LitElement {
   canSubmit() {
     const subject = this._form.querySelector('[data-fromes="subject"]').value;
     const message = this._form.querySelector('[data-fromes="message"]').value;
-    let receivers = this._receiversCollector.items ? this._receiversCollector.items : [];
+    let receivers = this._receiversComponent.items ? this._receiversComponent.items : [];
     return !(subject.length < 3 || message.length < 10 || receivers.length === 0);
   }
 

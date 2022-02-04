@@ -28,8 +28,14 @@ class ReceiverRepository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
-            ->select('fe_users.uid', 'fe_users.username', 'fe_users.first_name', 'fe_users.last_name',
-                'fe_users.name', 'fe_users.email')
+            ->select(
+                'fe_users.uid',
+                'fe_users.username',
+                'fe_users.first_name',
+                'fe_users.last_name',
+                'fe_users.name',
+                'fe_users.email'
+            )
             ->from('fe_users')
             ->orderBy('fe_users.first_name');
         $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));

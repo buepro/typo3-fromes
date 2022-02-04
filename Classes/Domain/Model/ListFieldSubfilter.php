@@ -13,17 +13,18 @@ namespace Buepro\Fromes\Domain\Model;
 
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
-class UserGroupSubfilter extends SubfilterBase
+class ListFieldSubfilter extends SubfilterBase
 {
     public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
     {
-        if (count($this->status) === 0) {
+        if (!isset($this->settings['table'], $this->settings['field']) || count($this->status) === 0) {
             return $queryBuilder;
         }
         $constraints = [];
+        $fieldName = $this->settings['table'] . '.' . $this->settings['field'];
         foreach ($this->status as $uid) {
             $constraints[] = $queryBuilder->expr()
-                ->inSet('usergroup', $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT));
+                ->inSet($fieldName, $queryBuilder->createNamedParameter($uid, \PDO::PARAM_INT));
         }
         // @phpstan-ignore-next-line
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$constraints));

@@ -40,7 +40,9 @@ plugin.tx_fromes_messenger {
     subfilters {
       feUserGroup {
         componentId = user-group
-        class = \Buepro\Fromes\Domain\Model\UserGroupSubfilter
+        class = \Buepro\Fromes\Domain\Model\ListFieldSubfilter
+        table = fe_users
+        field = usergroup
         items = TypoScript
         items {
           table = fe_groups

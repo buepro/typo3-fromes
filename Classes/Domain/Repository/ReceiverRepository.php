@@ -37,6 +37,7 @@ class ReceiverRepository
                 'fe_users.email'
             )
             ->from('fe_users')
+            ->groupBy('fe_users.uid', 'fe_users.first_name')
             ->orderBy('fe_users.first_name');
         $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
         $result = [];

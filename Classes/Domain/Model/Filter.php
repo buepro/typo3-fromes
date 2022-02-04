@@ -46,7 +46,7 @@ class Filter implements SubfilterInterface
         }
         return [
             'accessToken' => (new SessionService())->getAccessToken(),
-            'resultComponentId' => $this->settings['filter']['resultComponentId'] ?? 'undefined',
+            'resultComponentId' => $this->settings['filter']['result']['componentId'] ?? 'undefined',
             'jsonFilter' => $subfilterConfig,
         ];
     }

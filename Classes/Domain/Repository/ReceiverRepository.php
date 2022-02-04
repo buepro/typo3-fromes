@@ -15,25 +15,39 @@ use Buepro\Fromes\Domain\Model\Filter;
 use Doctrine\DBAL\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * The repository for Receivers
  */
 class ReceiverRepository
 {
-    public function getForFilter(Filter $filter): array
+    public function getForFilter(Filter $filter, array $conf = []): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
-            ->select('user.uid', 'user.first_name', 'user.last_name', 'user.name', 'user.email')
+            ->select('user.uid', 'user.username', 'user.first_name', 'user.last_name', 'user.name', 'user.email')
             ->from('fe_users', 'user')
             ->orderBy('user.first_name');
         $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
         $result = [];
+        if ($applyStdWrap = (isset($conf['label']) && is_array($conf['label']))) {
+            $cObj = new ContentObjectRenderer();
+            $tsConf = GeneralUtility::makeInstance(TypoScriptService::class)
+                ->convertPlainArrayToTypoScriptArray($conf);
+        }
         foreach ($rows as $row) {
-            $label = $row['name'] !== '' ? $row['name'] : trim($row['first_name'] . ' ' . $row['last_name']);
-            $label = $label === '' ? $row['email'] : $label;
+            if ($applyStdWrap) {
+                $cObj->data = $row;
+                $label = $cObj->stdWrap('', $tsConf['label.']);
+            }
+            if (!isset($label) || $label === '') {
+                $label = trim($row['first_name'] . ' ' . $row['last_name']);
+                $label = $label !== '' ? $label : $row['name'];
+                $label = $label !== '' ? $label : $row['email'];
+            }
             if (GeneralUtility::validEmail($row['email'])) {
                 $result[] = [
                     'id' => $row['uid'],

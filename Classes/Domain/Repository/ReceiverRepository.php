@@ -51,11 +51,12 @@ class ReceiverRepository
         $queryBuilder
             ->select('uid', 'first_name', 'last_name', 'name', 'email')
             ->from('fe_users')
-            ->where($queryBuilder->expr()->in(
+            ->where(
+                $queryBuilder->expr()->in(
                 'uid',
                 $queryBuilder->createNamedParameter($uidList, Connection::PARAM_INT_ARRAY)
             )
-        );
+            );
         return $this->getFromQueryBuilder($queryBuilder);
     }
 

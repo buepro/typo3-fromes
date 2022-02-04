@@ -56,8 +56,8 @@ class FilterMiddleware implements MiddlewareInterface
                 return $this->responseFactory->createResponse(500)
                     ->withHeader('Content-Type', 'application/json; charset=utf-8')
                     ->withBody($this->streamFactory->createStream(json_encode([
-                        "message" => $e->getMessage(),
-                        "code" => $e->getCode(),
+                        'message' => $e->getMessage(),
+                        'code' => $e->getCode(),
                     ], JSON_THROW_ON_ERROR)));
             }
         }

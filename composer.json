@@ -35,6 +35,7 @@
 		"friendsofphp/php-cs-fixer": "^3.0.0",
 		"friendsoftypo3/phpstan-typo3": "^0.8.1",
 		"helhum/typo3-console": "^6.6 || ^7.0.2",
+		"in2code/femanager": "^6.3",
 		"overtrue/phplint": "^2.3.5",
 		"phpstan/phpstan": "^0.12.87",
 		"phpstan/phpstan-deprecation-rules": "^0.12.6",
@@ -96,7 +97,6 @@
 			"phpstan analyze --configuration Build/phpstan.neon"
 		],
 		"ci:static": [
-			"@ci:composer:normalize",
 			"@ci:php:cs",
 			"@ci:php:lint",
 			"@ci:php:stan"

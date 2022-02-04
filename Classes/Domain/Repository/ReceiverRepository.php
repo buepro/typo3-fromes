@@ -28,9 +28,10 @@ class ReceiverRepository
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
-            ->select('user.uid', 'user.username', 'user.first_name', 'user.last_name', 'user.name', 'user.email')
-            ->from('fe_users', 'user')
-            ->orderBy('user.first_name');
+            ->select('fe_users.uid', 'fe_users.username', 'fe_users.first_name', 'fe_users.last_name',
+                'fe_users.name', 'fe_users.email')
+            ->from('fe_users')
+            ->orderBy('fe_users.first_name');
         $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
         $result = [];
         if ($applyStdWrap = (isset($conf['label']) && is_array($conf['label']))) {
@@ -67,9 +68,9 @@ class ReceiverRepository
             ->from('fe_users')
             ->where(
                 $queryBuilder->expr()->in(
-                'uid',
-                $queryBuilder->createNamedParameter($uidList, Connection::PARAM_INT_ARRAY)
-            )
+                    'uid',
+                    $queryBuilder->createNamedParameter($uidList, Connection::PARAM_INT_ARRAY)
+                )
             );
         return $this->getFromQueryBuilder($queryBuilder);
     }

@@ -27,7 +27,7 @@ plugin.tx_fromes_messenger {
 
   settings {
     filter {
-      includedSubfilters = feUserGroup
+      includedSubfilters = feUserGroup, feUserGender
       result {
         componentId = fm-list
         label {
@@ -54,6 +54,15 @@ plugin.tx_fromes_messenger {
             id = uid
             label = title
           }
+        }
+      }
+      feUserGender {
+        componentId = user-gender
+        class = \Buepro\Fromes\Domain\Model\TCAConfigItemsSubfilter
+        items = TCAConfigItems
+        items {
+          table = fe_users
+          column = gender
         }
       }
     }

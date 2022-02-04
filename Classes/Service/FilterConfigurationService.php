@@ -63,4 +63,25 @@ class FilterConfigurationService
             return $filtered;
         }, $items);
     }
+
+    protected function getFilterItemsFromTCAConfigItems(array $conf): array
+    {
+        if (
+            ($table = $conf['table'] ?? false) !== false &&
+            ($column = $conf['column'] ?? false) !== false &&
+            ($items = $GLOBALS['TCA'][$table]['columns'][$column]['config']['items'] ?? false) !== false
+        ) {
+            $result = [];
+            foreach ($items as $item) {
+                if (isset($item[0], $item[1])) {
+                    $result[] = [
+                        'id' => $item[1],
+                        'label' => $GLOBALS['TSFE']->sL($item[0])
+                    ];
+                }
+            }
+            return $result;
+        }
+        return [];
+    }
 }

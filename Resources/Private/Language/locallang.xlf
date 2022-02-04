@@ -6,6 +6,9 @@
 			<trans-unit id="userGroup" resname="userGroup">
 				<source>User group</source>
 			</trans-unit>
+			<trans-unit id="gender" resname="gender">
+				<source>Gender</source>
+			</trans-unit>
 			<trans-unit id="availableUsers" resname="availableUsers">
 				<source>Available users</source>
 			</trans-unit>

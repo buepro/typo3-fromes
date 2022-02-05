@@ -64,7 +64,7 @@ class Filter implements SubfilterInterface
         }
         if ($queryBuilder->getQueryPart('where') === null) {
             // We prevent showing all users when no filter criteria is set
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter(0)));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('fe_users.uid', $queryBuilder->createNamedParameter(0)));
         }
         return $queryBuilder;
     }

@@ -15,7 +15,7 @@ use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class Filter implements SubfilterInterface
+class Filter implements FilterInterface
 {
     /** @var array */
     protected $status = [];
@@ -32,6 +32,9 @@ class Filter implements SubfilterInterface
         $this->status = $status;
     }
 
+    /**
+     * @return array Contains the keys accessToken, resultComponentId and jsonFilter
+     */
     public function getConfigForWebComponent(): array
     {
         $subfilterConfig = [];
@@ -51,7 +54,19 @@ class Filter implements SubfilterInterface
         ];
     }
 
-    public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
+    /**
+     * @inheritDoc
+     */
+    public function setupQueryBuilders(QueryBuilder $queryBuilder): array
+    {
+        return [$queryBuilder];
+    }
+
+    /**
+     * @param QueryBuilder ...$queryBuilders
+     * @return QueryBuilder[]
+     */
+    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
     {
         foreach ($this->status as $subfilterStatus) {
             $settings = $this->getSubfilterSettingsFromId($subfilterStatus->id);
@@ -59,14 +74,20 @@ class Filter implements SubfilterInterface
                 class_exists($subfilterClass = $settings['class'] ?? '') &&
                 ($subfilter = new $subfilterClass($settings, $subfilterStatus->value)) instanceof SubfilterInterface
             ) {
-                $subfilter->modifyQueryBuilder($queryBuilder);
+                $subfilter->modifyQueryBuilders(...$queryBuilders);
             }
         }
-        if ($queryBuilder->getQueryPart('where') === null) {
-            // We prevent showing all users when no filter criteria is set
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('fe_users.uid', $queryBuilder->createNamedParameter(0)));
+        // Prevent showing all users when no filter criteria is set
+        foreach ($queryBuilders as $queryBuilder) {
+            if ($queryBuilder->getQueryPart('where') !== null) {
+                return $queryBuilders;
+            }
         }
-        return $queryBuilder;
+        $queryBuilders[0]->andWhere($queryBuilders[0]->expr()->eq(
+            'fe_users.uid',
+            $queryBuilders[0]->createNamedParameter(0)
+        ));
+        return $queryBuilders;
     }
 
     protected function getSubfilterSettingsFromId(string $id): array

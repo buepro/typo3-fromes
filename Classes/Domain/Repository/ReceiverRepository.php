@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Repository;
 
-use Buepro\Fromes\Domain\Model\Filter;
+use Buepro\Fromes\Domain\Model\FilterInterface;
 use Doctrine\DBAL\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -24,8 +24,16 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class ReceiverRepository
 {
-    public function getForFilter(Filter $filter, array $conf = []): array
+    /**
+     * @var string[]
+     */
+    protected $orderFields = ['first_name', 'last_name'];
+
+    public function getForFilter(FilterInterface $filter, array $conf = []): array
     {
+        if (isset($conf['orderFields'])) {
+            $this->orderFields = GeneralUtility::trimExplode(',', $conf['orderFields']);
+        }
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('fe_users')
             ->select(
@@ -37,9 +45,14 @@ class ReceiverRepository
                 'fe_users.email'
             )
             ->from('fe_users')
-            ->groupBy('fe_users.uid', 'fe_users.first_name')
-            ->orderBy('fe_users.first_name');
-        $rows = $this->getFromQueryBuilder($filter->modifyQueryBuilder($queryBuilder));
+            ->groupBy('fe_users.uid');
+        foreach ($this->orderFields as $orderField) {
+            $queryBuilder->addGroupBy('fe_users.' . $orderField);
+            $queryBuilder->addOrderBy('fe_users.' . $orderField);
+        }
+        $queryBuilders = $filter->setupQueryBuilders($queryBuilder);
+        $filter->modifyQueryBuilders(...$queryBuilders);
+        $rows = $this->getFromQueryBuilders(...$queryBuilders);
         $result = [];
         if ($applyStdWrap = (isset($conf['label']) && is_array($conf['label']))) {
             $cObj = new ContentObjectRenderer();
@@ -79,20 +92,39 @@ class ReceiverRepository
                     $queryBuilder->createNamedParameter($uidList, Connection::PARAM_INT_ARRAY)
                 )
             );
-        return $this->getFromQueryBuilder($queryBuilder);
+        return $this->getFromQueryBuilders($queryBuilder);
     }
 
-    private function getFromQueryBuilder(QueryBuilder $queryBuilder): array
+    private function getFromQueryBuilders(QueryBuilder ...$queryBuilders): array
     {
-        $queryResult = $queryBuilder->execute();
-        $rows = [];
-        if ($queryResult instanceof \Doctrine\DBAL\ForwardCompatibility\Result) {
-            $rows = $queryResult->fetchAllAssociative();
+        $result = [];
+        foreach ($queryBuilders as $queryBuilder) {
+            $rows = [];
+            $queryResult = $queryBuilder->execute();
+            if ($queryResult instanceof \Doctrine\DBAL\ForwardCompatibility\Result) {
+                $rows = $queryResult->fetchAllAssociative();
+            }
+            if ($rows === [] && $queryResult instanceof \Doctrine\DBAL\Driver\Statement) {
+                // @phpstan-ignore-next-line
+                $rows = $queryResult->fetchAll();
+            }
+            if ($rows !== [] && count($queryBuilders) === 1) {
+                return $rows;
+            }
+            if ($rows !== []) {
+                foreach ($rows as $row) {
+                    $orderPrefix = '';
+                    foreach ($this->orderFields as $orderField) {
+                        $orderPrefix .= $row[$orderField];
+                    }
+                    $key = $orderPrefix . $row['uid'];
+                    if (!isset($result[$key])) {
+                        $result[$key] = $row;
+                    }
+                }
+            }
         }
-        if ($rows === [] && $queryResult instanceof \Doctrine\DBAL\Driver\Statement) {
-            // @phpstan-ignore-next-line
-            $rows = $queryResult->fetchAll();
-        }
-        return $rows;
+        sort($result);
+        return $result;
     }
 }

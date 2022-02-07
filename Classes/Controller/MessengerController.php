@@ -54,8 +54,11 @@ class MessengerController extends ActionController
             return json_encode([], JSON_THROW_ON_ERROR);
         }
         $filterStatus = (json_decode($filterStatus, false, 512, JSON_THROW_ON_ERROR));
-        if ($filterStatus instanceof \stdClass && property_exists($filterStatus, 'data')) {
-            $filter = new Filter($this->settings, $filterStatus->data);
+        if (
+            $filterStatus instanceof \stdClass && property_exists($filterStatus, 'data') &&
+            class_exists($filterClass = $this->settings['filter']['class'])
+        ) {
+            $filter = new $filterClass($this->settings, $filterStatus->data);
             $receivers = $this->receiverRepository->getForFilter($filter, $this->settings['filter']['result']);
             return json_encode($receivers, JSON_THROW_ON_ERROR);
         }

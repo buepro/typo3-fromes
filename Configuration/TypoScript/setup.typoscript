@@ -28,8 +28,10 @@ plugin.tx_fromes_messenger {
   settings {
     filter {
       includedSubfilters = feUserGroup, feUserGender
+      class = \Buepro\Fromes\Domain\Model\Filter
       result {
         componentId = fm-list
+        orderFields = first_name,last_name
         label {
           // Label is of data type stdWrap
           field = name

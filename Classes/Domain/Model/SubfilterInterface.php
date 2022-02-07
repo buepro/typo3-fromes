@@ -14,7 +14,7 @@ namespace Buepro\Fromes\Domain\Model;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 /**
- * Provide a web component with configuration and a repository query with filter constraints.
+ * Provides a subfilter web component with configuration and modify the filter query builders.
  */
 interface SubfilterInterface
 {
@@ -30,7 +30,8 @@ interface SubfilterInterface
     public function getConfigForWebComponent(): array;
 
     /**
-     * @param QueryBuilder $queryBuilder Provided by the ReceiverRepository
+     * @param QueryBuilder ...$queryBuilders Provided by the ReceiverRepository
+     * @return QueryBuilder[]
      */
-    public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder;
+    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array;
 }

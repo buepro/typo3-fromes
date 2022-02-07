@@ -37,8 +37,8 @@ abstract class SubfilterBase implements SubfilterInterface
     /**
      * @inheritDoc
      */
-    public function modifyQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
+    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
     {
-        return $queryBuilder;
+        return $queryBuilders;
     }
 }

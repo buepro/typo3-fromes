@@ -2,7 +2,7 @@
 <f:layout name="Default" />
 <f:debug>{_all}</f:debug>
 <f:section name="Filter">
-    <fm-filter class="fm-filter" data-config="{filterConfig -> f:format.json()}" id="fm-filter">
+    <fm-filter class="fm-filter" data-config="{filterConfig -> f:format.json()}" id="fm-filter" result-id="fm-result">
         <f:form absolute="1" action="filter" method="post" name="filter">
             <f:form.hidden data="{fromes: 'status'}" name="filterStatus" />
         </f:form>
@@ -20,7 +20,7 @@
 </f:section>
 
 <f:section name="Result">
-    <fm-select-list class="fmc-result fmc-panel fmc-p-0" id="fm-list">
+    <fm-select-list class="fmc-result fmc-panel fmc-p-0" id="fm-result">
         <f:render partial="Components/ListHeader" arguments="{titleKey: 'availableUsers'}" />
         <f:render partial="Components/ListControl" />
         <f:render partial="Components/ListContent" />
@@ -29,7 +29,7 @@
 
 <f:section name="AddReceivers">
     <div class="fmc-add-receivers">
-        <button class="btn btn-primary" onclick="document.getElementById('fm-receivers').addItems(document.getElementById('fm-list').selected)"><span>❯</span></button>
+        <button class="btn btn-primary" onclick="document.getElementById('fm-receivers').addItems(document.getElementById('fm-result').selected)"><span>❯</span></button>
     </div>
 </f:section>
 

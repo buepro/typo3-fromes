@@ -18,8 +18,8 @@ export class FmAbstractList extends LitElement {
     this._itemsParent = itemTemplate.parentNode;
     this._itemTemplate = itemTemplate.cloneNode(true);
     itemTemplate.remove();
-    this.addEventListener('change', this.handleEvent.bind(this));
-    this.addEventListener('click', this.handleEvent.bind(this));
+    this.addEventListener('change', this.handleEvent);
+    this.addEventListener('click', this.handleEvent);
   }
 
   createRenderRoot() {
@@ -31,7 +31,7 @@ export class FmAbstractList extends LitElement {
   }
 
   fireChangeEvent() {
-    const changeEvent = new Event('fromes-process-change', { bubbles: true, composed: true });
+    const changeEvent = new Event('fromes-process-change', { bubbles: true });
     this.dispatchEvent(changeEvent);
   }
 

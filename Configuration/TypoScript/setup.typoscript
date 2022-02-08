@@ -40,7 +40,7 @@ plugin.tx_fromes_messenger {
     }
     subfilters {
       feUserGroup {
-        componentId = user-group
+        componentId = fm-user-group
         class = \Buepro\Fromes\Domain\Model\ListFieldSubfilter
         table = fe_users
         field = usergroup
@@ -60,7 +60,7 @@ plugin.tx_fromes_messenger {
         }
       }
       feUserGender {
-        componentId = user-gender
+        componentId = fm-user-gender
         class = \Buepro\Fromes\Domain\Model\TCAConfigItemsSubfilter
         items = TCAConfigItems
         items {

@@ -21,6 +21,8 @@ class Filter implements FilterInterface
     protected $status = [];
     /** @var array  */
     protected $settings = [];
+    /** @var QueryBuilder[] */
+    protected $queryBuilders = [];
 
     /**
      * @param array $settings Contains the keys `filter` and `subfilters`
@@ -33,7 +35,7 @@ class Filter implements FilterInterface
     }
 
     /**
-     * @return array Contains the keys accessToken, resultComponentId and jsonFilter
+     * @inheritDoc
      */
     public function getConfigForWebComponent(): array
     {
@@ -44,7 +46,7 @@ class Filter implements FilterInterface
                 ($config = $this->settings['subfilters'][$subfilter] ?? false) !== false &&
                 class_exists($className = $config['class'])
             ) {
-                $subfilterConfig[] = (new $className($config))->getConfigForWebComponent();
+                $subfilterConfig[] = (new $className($this, $config))->getConfigForWebComponent();
             }
         }
         return [
@@ -56,35 +58,44 @@ class Filter implements FilterInterface
     /**
      * @inheritDoc
      */
-    public function setupQueryBuilders(QueryBuilder $queryBuilder): array
+    public function setupQueryBuilders(QueryBuilder $queryBuilder): FilterInterface
     {
-        return [$queryBuilder];
+        $this->queryBuilders['default'] = $queryBuilder;
+        return $this;
     }
 
     /**
-     * @param QueryBuilder ...$queryBuilders
-     * @return QueryBuilder[]
+     * @inheritDoc
      */
-    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
+    public function getQueryBuilder(string $name): ?QueryBuilder
+    {
+        return $this->queryBuilders[$name] ?? null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function modifyQueryBuilders(): array
     {
         foreach ($this->status as $subfilterStatus) {
             $settings = $this->getSubfilterSettingsFromId($subfilterStatus->id);
             if (
                 class_exists($subfilterClass = $settings['class'] ?? '') &&
-                ($subfilter = new $subfilterClass($settings, $subfilterStatus->value)) instanceof SubfilterInterface
+                ($subfilter = new $subfilterClass($this, $settings, $subfilterStatus->value)) instanceof SubfilterInterface
             ) {
-                $subfilter->modifyQueryBuilders(...$queryBuilders);
+                $subfilter->modifyQueryBuilders();
             }
         }
         // Prevent showing all users when no filter criteria is set
-        foreach ($queryBuilders as $queryBuilder) {
+        foreach ($this->queryBuilders as $queryBuilder) {
             if ($queryBuilder->getQueryPart('where') !== null) {
-                return $queryBuilders;
+                return array_values($this->queryBuilders);
             }
         }
-        $queryBuilders[0]->andWhere($queryBuilders[0]->expr()->eq(
+        [$queryBuilder] = $queryBuilders = array_values($this->queryBuilders);
+        $queryBuilder->andWhere($queryBuilder->expr()->eq(
             'fe_users.uid',
-            $queryBuilders[0]->createNamedParameter(0)
+            $queryBuilder->createNamedParameter(0)
         ));
         return $queryBuilders;
     }
@@ -99,4 +110,5 @@ class Filter implements FilterInterface
         }
         return $result;
     }
+
 }

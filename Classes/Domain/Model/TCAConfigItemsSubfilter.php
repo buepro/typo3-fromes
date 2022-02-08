@@ -13,13 +13,15 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class TCAConfigItemsSubfilter extends SubfilterBase
 {
-    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
+    public function modifyQueryBuilders(): void
     {
-        if (count($this->status) === 0) {
-            return $queryBuilders;
+        if (
+            count($this->status) === 0 ||
+            ($queryBuilder = $this->filter->getQueryBuilder('default')) === null
+        ) {
+            return;
         }
         $constraints = [];
-        $queryBuilder = $queryBuilders[0];
         $fieldName = $this->settings['items']['table'] . '.' . $this->settings['items']['column'];
         foreach ($this->status as $fieldValue) {
             $constraints[] = $queryBuilder->expr()->eq(
@@ -28,6 +30,5 @@ class TCAConfigItemsSubfilter extends SubfilterBase
             );
         }
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$constraints));
-        return $queryBuilders;
     }
 }

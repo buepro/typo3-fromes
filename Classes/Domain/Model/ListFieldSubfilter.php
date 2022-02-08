@@ -15,12 +15,14 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 class ListFieldSubfilter extends SubfilterBase
 {
-    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
+    public function modifyQueryBuilders(): void
     {
-        if (!isset($this->settings['table'], $this->settings['field']) || count($this->status) === 0) {
-            return $queryBuilders;
+        if (
+            !isset($this->settings['table'], $this->settings['field']) || count($this->status) === 0 ||
+            ($queryBuilder = $this->filter->getQueryBuilder('default')) === null
+        ) {
+            return;
         }
-        $queryBuilder = $queryBuilders[0];
         $constraints = [];
         $fieldName = $this->settings['table'] . '.' . $this->settings['field'];
         foreach ($this->status as $uid) {
@@ -29,6 +31,5 @@ class ListFieldSubfilter extends SubfilterBase
         }
         // @phpstan-ignore-next-line
         $queryBuilder->andWhere($queryBuilder->expr()->orX(...$constraints));
-        return $queryBuilders;
     }
 }

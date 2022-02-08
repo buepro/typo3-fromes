@@ -14,17 +14,21 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 abstract class SubfilterBase implements SubfilterInterface
 {
+    /** @var FilterInterface */
+    protected $filter;
     /** @var array */
     protected $settings =  [];
     /** @var array */
     protected $status =  [];
 
     /**
+     * @param FilterInterface $filter
      * @param array $settings
      * @param array $status
      */
-    public function __construct(array $settings, array $status = [])
+    public function __construct(FilterInterface $filter, array $settings, array $status = [])
     {
+        $this->filter = $filter;
         $this->settings = $settings;
         $this->status = $status;
     }
@@ -32,13 +36,5 @@ abstract class SubfilterBase implements SubfilterInterface
     public function getConfigForWebComponent(): array
     {
         return (new FilterConfigurationService($this->settings))->getSubfilterConfig();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array
-    {
-        return $queryBuilders;
     }
 }

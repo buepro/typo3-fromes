@@ -22,7 +22,7 @@ interface SubfilterInterface
      * @param array $settings See TS setup `plugin.tx_fromes_messenger.settings.subfilters`
      * @param array $status The data structure depends on the class implementing this interface
      */
-    public function __construct(array $settings, array $status = []);
+    public function __construct(FilterInterface $filter, array $settings, array $status = []);
 
     /**
      * @return array The data structure depends on the class implementing this interface
@@ -30,8 +30,7 @@ interface SubfilterInterface
     public function getConfigForWebComponent(): array;
 
     /**
-     * @param QueryBuilder ...$queryBuilders Provided by the ReceiverRepository
-     * @return QueryBuilder[]
+     * Gets the required query builders from the filter and modifies them.
      */
-    public function modifyQueryBuilders(QueryBuilder ...$queryBuilders): array;
+    public function modifyQueryBuilders(): void;
 }

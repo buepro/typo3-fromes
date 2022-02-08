@@ -50,9 +50,7 @@ class ReceiverRepository
             $queryBuilder->addGroupBy('fe_users.' . $orderField);
             $queryBuilder->addOrderBy('fe_users.' . $orderField);
         }
-        $queryBuilders = $filter->setupQueryBuilders($queryBuilder);
-        $filter->modifyQueryBuilders(...$queryBuilders);
-        $rows = $this->getFromQueryBuilders(...$queryBuilders);
+        $rows = $this->getFromQueryBuilders(...$filter->setupQueryBuilders($queryBuilder)->modifyQueryBuilders());
         $result = [];
         if ($applyStdWrap = (isset($conf['label']) && is_array($conf['label']))) {
             $cObj = new ContentObjectRenderer();

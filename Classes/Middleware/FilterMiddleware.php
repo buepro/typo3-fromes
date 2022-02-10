@@ -51,6 +51,7 @@ class FilterMiddleware implements MiddlewareInterface
                     throw new \DomainException('Frontend user not available. Login is required.', 1644474339);
                 }
                 $extbaseBootstrap = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
+                // @extensionScannerIgnoreLine
                 $jsonString = $extbaseBootstrap->run('', [
                     'extensionName' => 'Fromes',
                     'pluginName' => 'Messenger',

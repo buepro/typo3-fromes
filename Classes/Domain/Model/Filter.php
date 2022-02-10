@@ -76,6 +76,7 @@ class Filter implements FilterInterface
     public function modifyQueryBuilders(): array
     {
         foreach ($this->status as $subfilterStatus) {
+            // @extensionScannerIgnoreLine
             $settings = $this->getSubfilterSettingsFromId($subfilterStatus->id);
             if (
                 class_exists($subfilterClass = $settings['class'] ?? '') &&

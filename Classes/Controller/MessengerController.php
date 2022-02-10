@@ -39,7 +39,6 @@ class MessengerController extends ActionController
         $this->view->assignMultiple([
             'filterConfig' => (new Filter($this->settings))->getConfigForWebComponent(),
             'emailConfig' => [
-                'accessToken' => (new SessionService())->getAccessToken(),
                 'receiversComponentId' => $this->settings['email']['receiversComponentId'] ?? '',
             ]
         ]);
@@ -47,12 +46,6 @@ class MessengerController extends ActionController
 
     public function filterAction(string $filterStatus = ''): string
     {
-        if (
-            GeneralUtility::makeInstance(Context::class)
-                ->getPropertyFromAspect('frontend.user', 'isLoggedIn') !== true
-        ) {
-            return json_encode([], JSON_THROW_ON_ERROR);
-        }
         $filterStatus = (json_decode($filterStatus, false, 512, JSON_THROW_ON_ERROR));
         if (
             $filterStatus instanceof \stdClass && property_exists($filterStatus, 'data') &&

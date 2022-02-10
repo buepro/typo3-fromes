@@ -54,7 +54,7 @@ export class FmFilter extends LitElement {
       {
       method: 'post',
       headers: {
-        'Fromes' : this.config['accessToken']
+        'Fromes' : 'Filter'
       },
       body: (new FormData(this._form)),
     })

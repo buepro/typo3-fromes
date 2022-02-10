@@ -67,7 +67,7 @@ export class FmEmail extends LitElement {
       {
         method: 'post',
         headers: {
-          'Fromes' : this.config['accessToken']
+          'Fromes' : 'Email'
         },
         body: (new FormData(this._form)),
       })

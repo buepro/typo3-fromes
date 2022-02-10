@@ -15,6 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\StreamFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -41,10 +42,16 @@ class FilterMiddleware implements MiddlewareInterface
     {
         if (
             isset($request->getHeader('fromes')[0]) &&
-            (new SessionService())->getAccessToken() === $request->getHeader('fromes')[0]
+            ($request->getHeader('fromes')[0] === 'Filter' || $request->getHeader('fromes')[0] === 'Email')
         ) {
-            $extbaseBootstrap = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
             try {
+                if (
+                    GeneralUtility::makeInstance(Context::class)
+                        ->getPropertyFromAspect('frontend.user', 'isLoggedIn') !== true
+                ) {
+                    throw new \DomainException('Frontend user not available. Login is required.', 1644474339);
+                }
+                $extbaseBootstrap = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Core\Bootstrap::class);
                 $jsonString = $extbaseBootstrap->run('', [
                     'extensionName' => 'Fromes',
                     'pluginName' => 'Messenger',

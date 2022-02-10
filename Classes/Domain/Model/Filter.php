@@ -50,7 +50,6 @@ class Filter implements FilterInterface
             }
         }
         return [
-            'accessToken' => (new SessionService())->getAccessToken(),
             'subfilters' => $subfilterConfig,
         ];
     }

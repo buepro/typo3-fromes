@@ -48,6 +48,12 @@ export class FmFilter extends LitElement {
   }
 
   createServerRequest() {
+    const checkStatus = async (response) => {
+      if (!response.ok) {
+        throw await response.json();
+      }
+      return await response.json();
+    }
     this.setFormData(this.status);
     fetch(
       this._form.action,
@@ -58,7 +64,7 @@ export class FmFilter extends LitElement {
       },
       body: (new FormData(this._form)),
     })
-      .then(response => response.json())
+      .then(checkStatus)
       .then(data => {
         document.getElementById(this.resultComponentId).items = data;
       })

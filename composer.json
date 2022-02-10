@@ -29,13 +29,11 @@
 	"require-dev": {
 		"bk2k/extension-helper": "^2.0",
 		"buepro/typo3-container-elements": "^3.0",
-		"buepro/typo3-grevman": "^1.0.0",
 		"buepro/typo3-pizpalue": "^12.0",
 		"ergebnis/composer-normalize": "^2.15.0",
 		"friendsofphp/php-cs-fixer": "^3.0.0",
 		"friendsoftypo3/phpstan-typo3": "^0.8.1",
 		"helhum/typo3-console": "^6.6 || ^7.0.2",
-		"in2code/femanager": "^6.3",
 		"overtrue/phplint": "^2.3.5",
 		"phpstan/phpstan": "^0.12.87",
 		"phpstan/phpstan-deprecation-rules": "^0.12.6",

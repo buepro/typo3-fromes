@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Model;
 
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-
 class ListFieldSubfilter extends SubfilterBase
 {
     public function modifyQueryBuilders(): void

@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Model;
 
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-
 /**
  * Provides a subfilter web component with configuration and modify the filter query builders.
  */

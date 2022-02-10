@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
-<f:debug>{_all}</f:debug>
+
 <f:section name="Filter">
     <fm-filter class="fm-filter" data-config="{filterConfig -> f:format.json()}" id="fm-filter" result-id="fm-result">
         <f:form absolute="1" action="filter" method="post" name="filter">
@@ -11,11 +11,13 @@
             <f:render partial="Components/ListControl" />
             <f:render partial="Components/ListContent" />
         </fm-select-list>
-        <fm-select-list class="fmc-subfilter fmc-panel fmc-p-0" id="fm-user-gender">
-            <f:render partial="Components/ListHeader" arguments="{titleKey: 'gender'}" />
-            <f:render partial="Components/ListControl" />
-            <f:render partial="Components/ListContent" />
-        </fm-select-list>
+        <f:if condition="{subfilterConfigById.fm-user-gender}">
+            <fm-select-list class="fmc-subfilter fmc-panel fmc-p-0" id="fm-user-gender">
+                <f:render partial="Components/ListHeader" arguments="{titleKey: 'gender'}" />
+                <f:render partial="Components/ListControl" />
+                <f:render partial="Components/ListContent" />
+            </fm-select-list>
+        </f:if>
     </fm-filter>
 </f:section>
 

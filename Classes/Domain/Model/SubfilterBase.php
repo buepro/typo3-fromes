@@ -10,7 +10,6 @@
 namespace Buepro\Fromes\Domain\Model;
 
 use Buepro\Fromes\Service\FilterConfigurationService;
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 
 abstract class SubfilterBase implements SubfilterInterface
 {

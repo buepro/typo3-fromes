@@ -50,5 +50,4 @@ interface FilterInterface
      * @return QueryBuilder[]
      */
     public function modifyQueryBuilders(): array;
-
 }

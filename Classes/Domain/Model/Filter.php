@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Buepro\Fromes\Domain\Model;
 
-use Buepro\Fromes\Service\SessionService;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -109,5 +108,4 @@ class Filter implements FilterInterface
         }
         return $result;
     }
-
 }

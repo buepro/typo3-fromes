@@ -9,8 +9,6 @@
 
 namespace Buepro\Fromes\Domain\Model;
 
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-
 class TCAConfigItemsSubfilter extends SubfilterBase
 {
     public function modifyQueryBuilders(): void

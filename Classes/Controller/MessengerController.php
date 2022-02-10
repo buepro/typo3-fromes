@@ -14,9 +14,7 @@ namespace Buepro\Fromes\Controller;
 use Buepro\Fromes\Domain\DTO\MailFormData;
 use Buepro\Fromes\Domain\Model\Filter;
 use Buepro\Fromes\Domain\Repository\ReceiverRepository;
-use Buepro\Fromes\Service\SessionService;
 use Symfony\Component\Mime\Address;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -38,6 +36,7 @@ class MessengerController extends ActionController
     {
         $this->view->assignMultiple([
             'filterConfig' => (new Filter($this->settings))->getConfigForWebComponent(),
+            'subfilterConfigById' => $this->getSubfilterConfigById(),
         ]);
     }
 
@@ -89,5 +88,22 @@ class MessengerController extends ActionController
             ->text($mailFormData->getMessage())
             ->send();
         return json_encode(['Mail sent successfully'], JSON_THROW_ON_ERROR);
+    }
+
+    private function getSubfilterConfigById(): array
+    {
+        $result = [];
+        $subfilters = GeneralUtility::trimExplode(',', $this->settings['filter']['includedSubfilters']);
+        foreach ($subfilters as $tsName => $subfilter) {
+            if (
+                ($config = $this->settings['subfilters'][$subfilter] ?? false) !== false &&
+                isset($config['componentId']) &&
+                class_exists($config['class'])
+            ) {
+                $config['tsName'] = $tsName;
+                $result[$config['componentId']] = $config;
+            }
+        }
+        return $result;
     }
 }

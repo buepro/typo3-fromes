@@ -69,9 +69,6 @@ plugin.tx_fromes_messenger {
         }
       }
     }
-    email {
-      receiversComponentId = fm-receivers
-    }
   }
 }
 

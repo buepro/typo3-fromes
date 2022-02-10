@@ -3,28 +3,23 @@ import { html, css, LitElement } from 'lit';
 export class FmEmail extends LitElement {
 
   _form = null;
-  _subject = null;
-  _message = null;
+  _subjectField = null;
+  _messageField = null;
   _submitButton = null;
   _receiversComponent = null;
 
-  static properties = {
-    config: { type: Object, attribute: 'data-fromes' }
-  };
-
   constructor() {
     super();
-    const _config = JSON.parse(this.getAttribute('data-fromes'));
     this._form = this.querySelector('form');
-    this._subject = this.querySelector('[data-fromes="subject"]');
-    this._message = this.querySelector('[data-fromes="message"]');
+    this._subjectField = this.querySelector('[data-fromes="subject"]');
+    this._messageField = this.querySelector('[data-fromes="message"]');
     this._submitButton = this.querySelector('[data-fromes="submit"]');
-    this._receiversComponent = document.getElementById(_config.receiversComponentId);
-    this._subject.value = '';
-    this._message.value = '';
+    this._receiversComponent = document.getElementById(this.getAttribute('receivers-id'));
+    this._subjectField.value = '';
+    this._messageField.value = '';
     this._submitButton.classList.add('disabled');
-    this._subject.addEventListener('keyup', this.renderSubmitButton.bind(this));
-    this._message.addEventListener('keyup', this.renderSubmitButton.bind(this));
+    this._subjectField.addEventListener('keyup', this.renderSubmitButton.bind(this));
+    this._messageField.addEventListener('keyup', this.renderSubmitButton.bind(this));
     this._submitButton.addEventListener('click', this.handleFormSubmitEvent.bind(this));
     this._receiversComponent.addEventListener('change', this.renderSubmitButton.bind(this));
   }
@@ -80,8 +75,8 @@ export class FmEmail extends LitElement {
       .then(data => {
         this.showSuccessMessage();
         this._receiversComponent.items = [];
-        this._subject.value = '';
-        this._message.value = '';
+        this._subjectField.value = '';
+        this._messageField.value = '';
         // console.log('Success:', data);
       })
       .catch((error) => {

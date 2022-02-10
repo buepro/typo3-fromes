@@ -1,6 +1,8 @@
-=========================
-TYPO3 extension `fromes`
-=========================
+.. include:: ../Includes.txt
+
+============
+Introduction
+============
 
 The extension provides a plugin allowing website users to send emails to
 other website users by compiling the receiver list with customizable
@@ -15,7 +17,7 @@ extensions.
 Screenshots
 ===========
 
-.. figure:: Documentation/Images/Overview.png
+.. figure:: ../Images/Overview.png
    :alt: Messenger panel
 
 Acknowledgement

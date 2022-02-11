@@ -13,9 +13,9 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'plugin',
     'author' => 'Roman Büchler',
     'author_email' => 'rb@buechler.pro',
-    'state' => 'beta',
+    'state' => 'stable',
     'clearCacheOnLoad' => 0,
-    'version' => '0.0.1',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
             'php'   => '>=7.3.0',

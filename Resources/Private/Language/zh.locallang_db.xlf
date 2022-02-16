@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang_db" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="zh-CN">
+  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang_db" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="zh-TW">
     <header/>
     <body>
       <trans-unit id="tx_fromes_messenger.name" resname="tx_fromes_messenger.name">

@@ -16,11 +16,11 @@
 			"role": "Developer"
 		}
 	],
-	"homepage": "https://github.com/buepro/typo3-grevman",
+	"homepage": "https://github.com/buepro/typo3-fromes",
 	"support": {
-		"issues": "https://github.com/buepro/typo3-grevman/issues",
-		"source": "https://github.com/buepro/typo3-grevman",
-		"docs": "https://docs.typo3.org/p/buepro/typo3-grevman/master/en-us/"
+		"issues": "https://github.com/buepro/typo3-fromes/issues",
+		"source": "https://github.com/buepro/typo3-fromes",
+		"docs": "https://docs.typo3.org/p/buepro/typo3-fromes/main/en-us/"
 	},
 	"require": {
 		"php": ">=7.3.0",

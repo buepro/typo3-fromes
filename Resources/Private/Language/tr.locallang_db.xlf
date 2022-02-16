@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang_db" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="tr">
+    <header/>
+    <body>
+      <trans-unit id="tx_fromes_messenger.name" resname="tx_fromes_messenger.name">
+        <source>Email messenger</source>
+        <target state="needs-translation">Email messenger</target>
+      </trans-unit>
+      <trans-unit id="tx_fromes_messenger.description" resname="tx_fromes_messenger.description">
+        <source>Email client with a flexible receiver filter.</source>
+        <target state="needs-translation">Email client with a flexible receiver filter.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

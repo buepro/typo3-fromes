@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="pt-BR">
+  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="pt-PT">
     <header/>
     <body>
       <trans-unit id="userGroup" resname="userGroup">

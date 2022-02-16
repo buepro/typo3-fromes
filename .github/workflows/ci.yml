@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches-ignore:
+      - 'l10n**'
   pull_request:
 
 jobs:

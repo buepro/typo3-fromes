@@ -1,59 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="ro">
+  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang_db" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="ro">
     <header/>
     <body>
-      <trans-unit id="userGroup" resname="userGroup">
-        <source>User group</source>
-        <target state="needs-translation">User group</target>
+      <trans-unit id="tx_fromes_messenger.name" resname="tx_fromes_messenger.name">
+        <source>Email messenger</source>
+        <target state="needs-translation">Email messenger</target>
       </trans-unit>
-      <trans-unit id="gender" resname="gender">
-        <source>Gender</source>
-        <target state="needs-translation">Gender</target>
-      </trans-unit>
-      <trans-unit id="availableUsers" resname="availableUsers">
-        <source>Available users</source>
-        <target state="needs-translation">Available users</target>
-      </trans-unit>
-      <trans-unit id="email" resname="email">
-        <source>Email</source>
-        <target state="needs-translation">Email</target>
-      </trans-unit>
-      <trans-unit id="receivers" resname="receivers">
-        <source>Receivers</source>
-        <target state="needs-translation">Receivers</target>
-      </trans-unit>
-      <trans-unit id="listItemSelection" resname="listItemSelection">
-        <source>List item selection</source>
-        <target state="needs-translation">List item selection</target>
-      </trans-unit>
-      <trans-unit id="all" resname="all">
-        <source>All</source>
-        <target state="needs-translation">All</target>
-      </trans-unit>
-      <trans-unit id="none" resname="none">
-        <source>None</source>
-        <target state="needs-translation">None</target>
-      </trans-unit>
-      <trans-unit id="subject" resname="subject">
-        <source>Subject</source>
-        <target state="needs-translation">Subject</target>
-      </trans-unit>
-      <trans-unit id="message" resname="message">
-        <source>Message</source>
-        <target state="needs-translation">Message</target>
-      </trans-unit>
-      <trans-unit id="send" resname="send">
-        <source>Send</source>
-        <target state="needs-translation">Send</target>
-      </trans-unit>
-      <trans-unit id="mailSuccess" resname="mailSuccess">
-        <source>The message was sent successfully.</source>
-        <target state="needs-translation">The message was sent successfully.</target>
-      </trans-unit>
-      <trans-unit id="mailError" resname="mailError">
-        <source>A problem occurred when trying to send the message. Please contact the system administrator</source>
-        <target state="needs-translation">A problem occurred when trying to send the message. Please contact the system administrator</target>
+      <trans-unit id="tx_fromes_messenger.description" resname="tx_fromes_messenger.description">
+        <source>Email client with a flexible receiver filter.</source>
+        <target state="needs-translation">Email client with a flexible receiver filter.</target>
       </trans-unit>
     </body>
   </file>

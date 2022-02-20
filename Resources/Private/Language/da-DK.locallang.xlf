@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:fromes/Resources/Private/Language/locallang" date="2022-01-07T16:30:32Z" product-name="fromes" target-language="da">
+    <header/>
+    <body>
+      <trans-unit id="userGroup" resname="userGroup" approved="yes">
+        <source>User group</source>
+        <target state="final">Brugergruppe</target>
+      </trans-unit>
+      <trans-unit id="gender" resname="gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Køn</target>
+      </trans-unit>
+      <trans-unit id="availableUsers" resname="availableUsers" approved="yes">
+        <source>Available users</source>
+        <target state="final">Tilgængelige brugere</target>
+      </trans-unit>
+      <trans-unit id="email" resname="email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="receivers" resname="receivers" approved="yes">
+        <source>Receivers</source>
+        <target state="final">Modtagere</target>
+      </trans-unit>
+      <trans-unit id="listItemSelection" resname="listItemSelection" approved="yes">
+        <source>List item selection</source>
+        <target state="final">Vis emnevalg</target>
+      </trans-unit>
+      <trans-unit id="all" resname="all" approved="yes">
+        <source>All</source>
+        <target state="final">Alle</target>
+      </trans-unit>
+      <trans-unit id="none" resname="none" approved="yes">
+        <source>None</source>
+        <target state="final">Ingen</target>
+      </trans-unit>
+      <trans-unit id="subject" resname="subject" approved="yes">
+        <source>Subject</source>
+        <target state="final">Emne</target>
+      </trans-unit>
+      <trans-unit id="message" resname="message" approved="yes">
+        <source>Message</source>
+        <target state="final">Besked</target>
+      </trans-unit>
+      <trans-unit id="send" resname="send" approved="yes">
+        <source>Send</source>
+        <target state="final">Send</target>
+      </trans-unit>
+      <trans-unit id="mailSuccess" resname="mailSuccess" approved="yes">
+        <source>The message was sent successfully.</source>
+        <target state="final">Beskeden blev sendt med succes.</target>
+      </trans-unit>
+      <trans-unit id="mailError" resname="mailError" approved="yes">
+        <source>A problem occurred when trying to send the message. Please contact the system administrator</source>
+        <target state="final">Der opstod et problem under forsøget på at sende beskeden. Kontakt systemadministratoren</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

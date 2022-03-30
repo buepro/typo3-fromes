@@ -33,3 +33,4 @@ Frontend messenger
 
    Introduction/Index
    Tutorials/Index
+   Changelog/Index

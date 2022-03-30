@@ -29,7 +29,7 @@ extensions.
 Screenshots
 ===========
 
-.. figure:: ../Images/Overview.png
+.. figure:: ../Images/Overview.jpg
    :alt: Messenger panel
 
 Acknowledgement

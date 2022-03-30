@@ -31,7 +31,7 @@ extensions.
 Screenshots
 ===========
 
-.. figure:: Documentation/Images/Overview.png
+.. figure:: Documentation/Images/Overview.jpg
    :alt: Messenger panel
 
 Acknowledgement

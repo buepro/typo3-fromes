@@ -1,4 +1,16 @@
-.. include:: ../Includes.txt
+.. include:: /Includes.rst.txt
+
+.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
+   :alt: TYPO3 11
+   :target: https://get.typo3.org/version/11
+
+.. image:: https://img.shields.io/badge/TYPO3-10-orange.svg
+   :alt: TYPO3 10
+   :target: https://get.typo3.org/version/10
+
+.. image:: https://github.com/buepro/typo3-fromes/workflows/CI/badge.svg
+   :alt: Continuous Integration Status
+   :target: https://github.com/buepro/typo3-fromes/actions?query=workflow%3ACI
 
 ============
 Introduction
@@ -24,10 +36,3 @@ Acknowledgement
 ===============
 
 This extension has been sponsored by `SAC-Sektion Uto <https://www.sac-uto.ch>`__.
-
-Code quality
-============
-
-.. image:: https://github.com/buepro/typo3-fromes/workflows/CI/badge.svg
-   :alt: Continuous Integration Status
-   :target: https://github.com/buepro/typo3-fromes/actions?query=workflow%3ACI

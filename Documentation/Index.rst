@@ -1,16 +1,13 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. include:: Includes.txt
-
+.. include:: /Includes.rst.txt
 
 .. _start:
 
 ==================
 Frontend messenger
 ==================
+
+:extension key:
+   fromes
 
 :Version:
    |release|
@@ -29,8 +26,7 @@ Frontend messenger
    available from http://www.opencontent.org/opl.shtml
 
 
-Table of content
-================
+**Table of Contents**
 
 .. toctree::
    :maxdepth: 2

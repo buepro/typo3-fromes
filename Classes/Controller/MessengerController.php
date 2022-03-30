@@ -85,8 +85,12 @@ class MessengerController extends ActionController
             ->to(new Address($senderEmail, $senderName))
             ->bcc(...$receivers)
             ->subject($mailFormData->getSubject())
-            ->text($mailFormData->getMessage())
-            ->send();
+            ->text($mailFormData->getMessage());
+        foreach ($mailFormData->getFiles() as $file) {
+            $mail->attachFromPath($file);
+        }
+        $mail->send();
+        $mailFormData->deleteFiles();
         return json_encode(['Mail sent successfully'], JSON_THROW_ON_ERROR);
     }
 

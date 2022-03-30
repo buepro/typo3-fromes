@@ -79,6 +79,10 @@
             <div class="mb-3">
                 <textarea class="form-control" data-fromes="message" name="message"></textarea>
             </div>
+            <div class="input-group mb-3">
+                <input class="form-control" data-fromes="files" multiple="1" name="subject" type="file" />
+                <span class="input-group-text d-none" data-fromes="clear-files">✕</span>
+            </div>
             <input data-fromes="receivers" name="receivers" type="hidden" />
         </form>
         <button class="btn btn-primary" data-fromes="submit">Send</button>

@@ -1,0 +1,2 @@
+# cat=File; type=string; label=Allowed file types:Coma separated list from file extensions that are allowed in file uploads.
+allowedFileTypes = jpg,png,gif,bmp,pdf,mp3,doc,pdf

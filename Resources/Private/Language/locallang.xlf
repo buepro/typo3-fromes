@@ -33,6 +33,9 @@
 			<trans-unit id="message" resname="message">
 				<source>Message</source>
 			</trans-unit>
+			<trans-unit id="files" resname="files">
+				<source>Files</source>
+			</trans-unit>
 			<trans-unit id="send" resname="send">
 				<source>Send</source>
 			</trans-unit>

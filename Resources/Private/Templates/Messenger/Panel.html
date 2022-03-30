@@ -58,6 +58,12 @@
                 <div class="form-group">
                     <f:form.textarea class="form-control" data="{fromes: 'message'}" name="mailFormData[message]" placeholder="{f:translate(key: 'message')}*" />
                 </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <f:form.upload class="form-control" data="{fromes: 'files'}" multiple="1" name="mailFormData[files]" />
+                        <button class="input-group-text d-none" data-fromes="clear-files">✕</button>
+                    </div>
+                </div>
                 <f:form.hidden data="{fromes: 'receivers'}" name="mailFormData[receivers]" />
             </f:form>
             <button class="btn btn-primary" data-fromes="submit">{f:translate(key: 'send')}</button>

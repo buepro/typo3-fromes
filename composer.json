@@ -16,11 +16,11 @@
 			"role": "Developer"
 		}
 	],
-	"homepage": "https://github.com/buepro/typo3-fromes",
+	"homepage": "https://extensions.typo3.org/extension/fromes",
 	"support": {
+		"docs": "https://docs.typo3.org/p/buepro/typo3-fromes/main/en-us/",
 		"issues": "https://github.com/buepro/typo3-fromes/issues",
-		"source": "https://github.com/buepro/typo3-fromes",
-		"docs": "https://docs.typo3.org/p/buepro/typo3-fromes/main/en-us/"
+		"source": "https://github.com/buepro/typo3-fromes"
 	},
 	"require": {
 		"php": ">=7.3.0",

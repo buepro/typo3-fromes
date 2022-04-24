@@ -16,6 +16,9 @@ plugin.tx_fromes_messenger {
   }
 
   settings {
+    email {
+      addressMode = {$plugin.tx_fromes_events.settings.email.addressMode}
+    }
     filter {
       includedSubfilters = feUserGroup
       class = \Buepro\Fromes\Domain\Model\Filter

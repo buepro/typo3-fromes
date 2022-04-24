@@ -83,9 +83,13 @@ class MessengerController extends ActionController
             ->from(new Address($systemEmail, $senderName))
             ->replyTo(new Address($senderEmail, $senderName))
             ->to(new Address($senderEmail, $senderName))
-            ->bcc(...$receivers)
             ->subject($mailFormData->getSubject())
             ->text($mailFormData->getMessage());
+        $addressMethod = 'add' . ucfirst($this->settings['email']['addressMode'] ?? 'Bcc');
+        if (!method_exists($mail, $addressMethod)) {
+            $addressMethod = 'addBcc';
+        }
+        $mail->$addressMethod(...$receivers);
         foreach ($mailFormData->getFiles() as $file) {
             $mail->attachFromPath($file);
         }

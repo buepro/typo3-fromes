@@ -15,6 +15,12 @@ website. The backend is accessible by adding `typo3` to the domain.
 
 .. rst-class:: bignums
 
+#. System mail settings
+
+   Make sure the system mail settings are correct. A sender email address is
+   required. The settings ca be found under `Configure Installation-Wide Options`
+   from the module `Settings`.
+
 #. Test login
 
    Make sure you can login to the website. In most cases the system extension
